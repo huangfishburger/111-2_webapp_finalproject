@@ -1,10 +1,7 @@
-import { Button, Modal } from 'antd';
-import { UpdateForm } from '../components/UpdateForm';
+import { Modal } from 'antd';
+import { UpdateForm } from '../../components/UpdateForm';
 
 const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen }) => {
-  const handleOk = () => {
-    setIsUpdateRecordModalOpen(false);
-  };
   const handleCancel = () => {
     setIsUpdateRecordModalOpen(false);
   };
@@ -20,4 +17,5 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
     </Modal>
   );
 };
+
 export { UpdateRecordModal };

@@ -11,6 +11,11 @@
   width: 100%;
 }
 
+.ant-select-selector{
+  background-color: transparent !important;
+  border: none !important;
+}
+
 .ant-list-item, .ant-collapse{
   width: 100% !important;
 }
@@ -19,7 +24,7 @@
   padding: 0 !important;
 }
 
-.ant-collapse-expand-icon{
+.collapse-list .ant-collapse-expand-icon{
   position: absolute;
   right: 0;
   top: 19px;

@@ -9,7 +9,7 @@ const { Footer, Content } = Layout;
 const contentStyle = {
   minHeight: 450,
   lineHeight: '120px',
-  paddingInline: "50px",
+  paddingInline: "3.5vw",
 };
 const footerStyle = {
   height: 100,

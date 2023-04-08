@@ -27,4 +27,24 @@ const StatusTag = ({ status }) => {
   );
 }
 
-export { StatusTag }
+const tagRender = ({ label, value, closable, onClose }) => {
+  const onPreventMouseDown = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+  return (
+    <CustomizedTag
+      color={statusColor[label]}
+      onMouseDown={onPreventMouseDown}
+      closable={closable}
+      onClose={onClose}
+      style={{
+        marginRight: 3,
+      }}
+    >
+      {label}
+    </CustomizedTag>
+  );
+};
+
+export { StatusTag, tagRender }

@@ -1,4 +1,4 @@
-import { Layout, Menu, Button } from 'antd';
+import { Layout, Menu, Button, Dropdown } from 'antd';
 import styled from 'styled-components';
 import 'material-icons/iconfont/material-icons.css';
 const { Header } = Layout;
@@ -75,6 +75,27 @@ const navItems = ['主畫面', '教育', '紀錄', '聯絡我們', '贊助'].map
   key,
   label: `${key}`,
 }));
+
+const loginItems = [
+  {
+    label: (
+      <div>
+        <span class="material-icons-round">login</span> 
+        登入
+      </div>
+    ),
+    key: '0',
+  },
+  {
+    label: (
+      <div>
+        <span class="material-icons-round">groups</span> 
+        註冊
+      </div>
+    ),
+    key: '1',
+  }
+];
   
 
 const Navbar = () => {
@@ -91,9 +112,15 @@ const Navbar = () => {
           items={navItems} 
           style={menuStyle}
         />      
-        <Button shape="circle" style={navItemsStyle}>
-          <span class="material-icons-round" style={buttonStyle}>person</span> 
-        </Button>
+        <Dropdown
+          menu={{
+            items: loginItems
+          }}
+        >
+          <Button shape="circle" style={navItemsStyle}>
+            <span class="material-icons-round" style={buttonStyle}>person</span> 
+          </Button>
+        </Dropdown>
       </div>
     </CustomizedHeader>
   )
