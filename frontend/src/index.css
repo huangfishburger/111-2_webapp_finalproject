@@ -5,12 +5,47 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.ant-btn-default{
+  border: none;
+}
+
+.ant-btn, .ant-btn-primary{
+  box-shadow: none;
+}
+
+.ant-form label, .ant-form label span{
+  display: flex;
+  align-items: center;
+}
+
+.ant-modal-root .ant-modal-wrap{
+  overflow-x: hidden !important;
+}
+/*
+.ant-menu-item:hover, .ant-menu-item-selected{
+  color: rgb(98, 109, 75) !important;
+}
+
+.ant-menu-item-selected::after, .ant-menu-item:hover::after{
+  border-bottom-color: rgb(98, 109, 75) !important;
+}
+
+.ant-btn-primary:hover{
+  background-color: rgb(117, 131, 89) !important;
+}
+
+.ant-btn-primary:focus{
+  background-color: rgb(72, 81, 55) !important;
+}
+*/
 
 ::-webkit-scrollbar {
   width: 5px; 

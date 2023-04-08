@@ -1,5 +1,5 @@
 import { Col, Row } from 'antd';
-import { Lists } from '../components/Lists';
+import { Lists } from './Lists';
 import { MapContainer } from './MapContainer';
 import './../css/RecordPage.css';
 

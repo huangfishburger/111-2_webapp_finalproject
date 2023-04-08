@@ -4,41 +4,74 @@ import 'material-icons/iconfont/material-icons.css';
 const { Header } = Layout;
 
 const CustomizedHeader = styled(Header)`
-  height: 60px;
+  position: absolute;
+  top: 20px;
+  height: 30px;
+  width: 100%;
   padding-inline: 50px;
   line-height: 64px;
   background: transparent !important;
   align-items: center;
+  justify-content: space-between;
   display: flex;
-  &>.ant-menu{
-    background: transparent !important;
+  z-index: 99;
+  & .ant-menu{
+    backgroundColor: #ffffff70;
+    backdropFilter: blur(5px);
+    height: 100%;
+    font-size: small;
+    font-weight: 700;
+  }
+  & .ant-menu-item, .ant-menu-submenu-title{
+    display: flex;
+    align-items: center;
+    height: 100%;
   }
 `;
-const navItemsStyle = {
+const navTitleStyle = {
   width: "max-content",
   minWidth: "170px",
-  height: "70%",
-  float: "left",
+  height: "100%",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   fontWeight: "700",
   fontSize: "large",
+  backgroundColor: "#ffffff70",
+  backdropFilter: "blur(5px)",
+  borderRadius: "15px",
+}
+const navItemsStyle = {
+  width: "30px",
+  height: "30px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "medium",
+  backgroundColor: "#ffffff70",
+  backdropFilter: "blur(5px)",
+  borderRadius: "50%",
 }
 const buttonStyle = {
   width: "30px",
   height: "30px",
   borderRadius: "50%",
-  backgroundColor: "#ffffff",
   color: "#161616",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
 }
 const menuStyle = {
-    float: "left",
+  height: "30px",
+  width: "100%",
+  display: "flex",
+  justifyContent: "space-around",
+  backgroundColor: "#ffffff70",
+  backdropFilter: "blur(5px)",
+  borderRadius: "15px",
+  paddingInline: "10px",
 }
-const navItems = ['主畫面', '知識小遊戲', '通報系統'].map((key) => ({
+const navItems = ['主畫面', '教育', '紀錄', '聯絡我們', '贊助'].map((key) => ({
   key,
   label: `${key}`,
 }));
@@ -47,21 +80,21 @@ const navItems = ['主畫面', '知識小遊戲', '通報系統'].map((key) => (
 const Navbar = () => {
   return (
     <CustomizedHeader theme="light">
-      <div style={navItemsStyle}>
-        <span class="material-icons-round">bug_report</span> 
-        台灣兩棲保育平台  
+      <div style={navTitleStyle}>
+        🐸 青蛙的第一個家  
       </div>
-      <Menu 
-        theme="light" 
-        mode="horizontal" 
-        defaultSelectedKeys={['0']} 
-        items={navItems} 
-        style={menuStyle}
-      />
-      <Button type="primary" size='large' shape="round" style={navItemsStyle}>
-        尚未登入
-        <span class="material-icons-round" style={buttonStyle}>person</span> 
-      </Button>
+      <div style={{display: "flex", width: "40%"}}>
+        <Menu 
+          theme="light" 
+          mode="horizontal" 
+          defaultSelectedKeys={['0']} 
+          items={navItems} 
+          style={menuStyle}
+        />      
+        <Button shape="circle" style={navItemsStyle}>
+          <span class="material-icons-round" style={buttonStyle}>person</span> 
+        </Button>
+      </div>
     </CustomizedHeader>
   )
 };

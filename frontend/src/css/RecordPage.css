@@ -1,7 +1,38 @@
-#map{
-  border-radius: 5px;
-  height: 90vh;
+#map_container{
+  border-radius: 15px;
+  height: 95vh;
   width: 100%;
   margin: 5px 20px;
-  background-color: bisque;
+  overflow: hidden;
+}
+
+.map{
+  height: 100%;
+  width: 100%;
+}
+
+.ant-list-item, .ant-collapse{
+  width: 100% !important;
+}
+
+.ant-collapse-header{
+  padding: 0 !important;
+}
+
+.ant-collapse-expand-icon{
+  position: absolute;
+  right: 0;
+  top: 19px;
+  z-index: 2;
+  height: 32px !important;
+  width: 32px;
+  border-radius: 50%;
+}
+
+.ant-form-item{
+  margin-bottom: 10px;
+}
+
+.ant-form-item-label{
+  padding: 0 0 5px;
 }

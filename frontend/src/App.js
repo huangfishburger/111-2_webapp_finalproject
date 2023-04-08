@@ -23,9 +23,6 @@ function App() {
         <Content style={contentStyle}>
           <RecordPage />
         </Content>
-        <Footer style={footerStyle}>
-
-        </Footer>
       </Layout>
     </div>
   );
