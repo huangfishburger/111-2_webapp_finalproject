@@ -1,5 +1,4 @@
 import { Modal, Input, Image, Tag, Collapse } from 'antd';
-import { UpdateForm } from '../../components/UpdateForm';
 import { useState, useRef } from 'react';
 import Draggable from 'react-draggable';
 import styled from 'styled-components';
@@ -15,7 +14,9 @@ const CommentContainer = styled.div`
 `;
 
 const CommentPost = styled(Collapse)`
-
+  & .ant-collapse-content{
+    border-bottom: 1px solid rgb(238, 238, 238) !important;
+  }
 `;
 
 const CommentItem = styled.div`
@@ -31,9 +32,19 @@ const CommentText = styled.div`
   margin-left: 5px;
   padding: 0 10px;
   color: #161616;
-  &>.author{
+  &>.header{
+    display: flex;
+    align-items: center;
+  }
+  &>.header>.author{
     font-weight: 700;
     font-size: small;
+  }
+  &>.header>.time{
+    font-weight: 400;
+    font-size: xx-small; 
+    margin-left: 5px;
+    color: rgb(102, 102, 102);
   }
   &>.context{
     font-size: x-small;
@@ -140,7 +151,10 @@ const CommentModal = ({ title, context, isCommentModalOpen, setIsCommentModalOpe
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <CommentText>
-            <div className='author'>間諜青蛙</div>
+            <div className='header'>
+              <span className='author'>間諜青蛙</span>
+              <span className='time'>5:20PM | 04.08 2023</span>
+            </div>
             <div className='context'>HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH</div>
             <Tag
               className="comment-tag"
@@ -157,7 +171,10 @@ const CommentModal = ({ title, context, isCommentModalOpen, setIsCommentModalOpe
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <CommentText>
-            <div className='author'>間諜青蛙</div>
+            <div className='header'>
+              <span className='author'>間諜青蛙</span>
+              <span className='time'>5:20PM | 04.08 2023</span>
+            </div>
             <div className='context'>HHHHHHHHHHHHHHH</div>
             <Tag
               className="comment-tag"
@@ -174,7 +191,10 @@ const CommentModal = ({ title, context, isCommentModalOpen, setIsCommentModalOpe
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <CommentText>
-            <div className='author'>間諜青蛙</div>
+            <div className='header'>
+              <span className='author'>間諜青蛙</span>
+              <span className='time'>5:20PM | 04.08 2023</span>
+            </div>
             <div className='context'>HHHHHHHHHHHHHHH</div>
             <Tag
               className="comment-tag"
@@ -191,7 +211,10 @@ const CommentModal = ({ title, context, isCommentModalOpen, setIsCommentModalOpe
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />
           <CommentText>
-            <div className='author'>間諜青蛙</div>
+            <div className='header'>
+              <span className='author'>間諜青蛙</span>
+              <span className='time'>5:20PM | 04.08 2023</span>
+            </div>
             <div className='context'>HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH</div>
             <Tag
               className="comment-tag"
