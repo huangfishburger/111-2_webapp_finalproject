@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Layout, Menu, Button, Dropdown } from 'antd';
 import styled from 'styled-components';
 import 'material-icons/iconfont/material-icons.css';
@@ -71,9 +72,18 @@ const menuStyle = {
   borderRadius: "15px",
   paddingInline: "10px",
 }
-const navItems = ['主畫面', '教育', '紀錄', '聯絡我們', '贊助'].map((key) => ({
+
+const navLabelItems = {
+  "": "主畫面",
+  "educate": "教育",
+  "record": "紀錄",
+  "contact": "關於我們",
+  "foundation": "贊助我們",
+}
+
+const navItems = ['', 'educate', 'record', 'contact', 'foundation'].map((key) => ({
   key,
-  label: `${key}`,
+  label: <Link to={"/"+key}>{navLabelItems[key]}</Link>,
 }));
 
 const loginItems = [
@@ -102,13 +112,13 @@ const Navbar = () => {
   return (
     <CustomizedHeader theme="light">
       <div style={navTitleStyle}>
-        🐸 青蛙的第一個家  
+        FroGather
       </div>
       <div style={{display: "flex", width: "40%"}}>
         <Menu 
           theme="light" 
           mode="horizontal" 
-          defaultSelectedKeys={['0']} 
+          defaultSelectedKeys={['']} 
           items={navItems} 
           style={menuStyle}
         />      
