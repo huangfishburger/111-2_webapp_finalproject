@@ -29,6 +29,12 @@ const subNameTextStyle = {
   letterSpacing: "1.5px",
   color: "#666666",
 };
+const timestampTextStyle = {
+  fontWeight: "400", 
+  fontSize: "xx-small", 
+  margin: "10px 0", 
+  color: "rgb(102, 102, 102)"
+}
 const { Panel } = Collapse;
 
 const ListItems = ({ item }) => {
@@ -52,7 +58,7 @@ const ListItems = ({ item }) => {
 
   const context = 
     <>
-      {text} <div style={{fontWeight: "400", fontSize: "xx-small", margin: "10px 0", color: "rgb(102, 102, 102)"}}>5:20PM | 04.08 2023</div>
+      {text} <div style={timestampTextStyle}>5:20PM | 04.08 2023</div>
     </>
   
   return (

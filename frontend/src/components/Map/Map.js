@@ -1,4 +1,41 @@
-const Map = ({ children, mapRef }) => {
+import { useEffect, useContext } from "react";
+import MapContext from "../../hook/MapContext";
+import * as ol from "ol";
+
+const Map = ({ children }) => {
+	const { map, mapRef, zoom, center, setCenter, setMap } = useContext(MapContext);
+
+	// on component mount
+	useEffect(() => {
+		let options = { 
+			view: new ol.View({ zoom, center }),
+			layers: [],
+			controls: [],
+			overlays: [],
+		};
+		
+		let mapObject = new ol.Map(options);
+
+		mapObject.setTarget(mapRef.current);
+		setMap(mapObject);
+
+		return () => {
+			mapObject.setTarget(undefined);
+		}
+	}, []);
+
+	// zoom change handler
+	useEffect(() => {
+		if (!map) return;
+		map.getView().setZoom(zoom);
+	}, [zoom]);
+
+	// center change handler
+	useEffect(() => {
+		if (!map) return;
+		map.getView().setCenter(center);
+	}, [center]);
+
 	return (
 		<div ref={mapRef} className="map" >
 			{children}

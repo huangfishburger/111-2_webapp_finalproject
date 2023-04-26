@@ -90,7 +90,7 @@ const loginItems = [
   {
     label: (
       <div>
-        <span class="material-icons-round">login</span> 
+        <span className="material-icons-round">login</span> 
         登入
       </div>
     ),
@@ -99,7 +99,7 @@ const loginItems = [
   {
     label: (
       <div>
-        <span class="material-icons-round">groups</span> 
+        <span className="material-icons-round">groups</span> 
         註冊
       </div>
     ),
@@ -128,7 +128,7 @@ const Navbar = () => {
           }}
         >
           <Button shape="circle" style={navItemsStyle}>
-            <span class="material-icons-round" style={buttonStyle}>person</span> 
+            <span className="material-icons-round" style={buttonStyle}>person</span> 
           </Button>
         </Dropdown>
       </div>

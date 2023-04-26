@@ -24,6 +24,7 @@ code {
 .ant-form label, .ant-form label span{
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .ant-modal-root .ant-modal-wrap{

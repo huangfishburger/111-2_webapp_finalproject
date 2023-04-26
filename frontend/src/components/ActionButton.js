@@ -15,8 +15,8 @@ const CustomizedButton = styled(Button)`
 
 const ActionButton = ({ icon, onClickEvent }) => {
   return (
-    <CustomizedButton class="material-icons-round" shape="circle" onClick={onClickEvent}>
-      <span class="material-icons-round">{icon}</span>
+    <CustomizedButton className="material-icons-round" shape="circle" onClick={onClickEvent}>
+      <span className="material-icons-round">{icon}</span>
     </CustomizedButton>
   );
 }

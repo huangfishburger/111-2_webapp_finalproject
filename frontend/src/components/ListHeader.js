@@ -58,7 +58,7 @@ const ListsHeader = () => {
       </Tooltip>
       <Tooltip title="回報紀錄" >
         <Button type="primary" onClick={showModal} style={{width: "64px", height: "30px"}}>
-          <span class="material-icons-round">add</span>
+          <span className="material-icons-round">add</span>
         </Button>
       </Tooltip>
       <UpdateRecordModal isUpdateRecordModalOpen={isUpdateRecordModalOpen} setIsUpdateRecordModalOpen={setIsUpdateRecordModalOpen} />

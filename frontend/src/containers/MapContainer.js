@@ -1,14 +1,17 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button, Tooltip } from 'antd';
 import styled from 'styled-components';
-import { fromLonLat } from "ol/proj";
+import { fromLonLat, toLonLat } from "ol/proj";
 import { Map } from "./../components/Map/Map";
-import { Layers, MapBoxLayer, VectorLayer } from "./../components/Layers";
+import { Layers, MapBoxLayer, VectorLayer, DrawVectorLayer } from "./../components/Layers";
 import Geolocation from 'ol/Geolocation.js';
 import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
 import { Icon, Circle as CircleStyle, Style, Fill, Stroke } from "ol/style";
 import { vector } from "../components/Sources";
+import Pin from './../data/pin.svg';
+import MapContext from "../hook/MapContext";
+import * as olTransform from 'ol/transform';
 
 const ViewButton = styled(Button)`
   position: absolute;
@@ -27,6 +30,8 @@ const ViewButton = styled(Button)`
 `;
 
 const MapContainer = ({mapView, setMapView}) => {
+  const { userCoord } = useContext(MapContext);
+
   const handleViewButtonClick = () => {
     setMapView(!mapView)
   };
@@ -46,32 +51,56 @@ const MapContainer = ({mapView, setMapView}) => {
     <div id="map_container">
       <ViewButton shape="round" onClick={handleViewButtonClick}>
         <Tooltip title="切換地圖模式">
-          <span class="material-icons-round">visibility</span>
+          <span className="material-icons-round">visibility</span>
           僅顯示
         </Tooltip>
       </ViewButton>
-      <Map center={fromLonLat(center)} zoom={zoom} setCenter={setCenter}>
+      <Map>
         <Layers>
             <MapBoxLayer name={"basemap_mapbox"} zIndex={0} />
+            <DrawVectorLayer 
+              name={"draw"}
+              source={vector({
+                  features: [
+                    new Feature({
+                      geometry: new Point(fromLonLat(toLonLat(userCoord, "EPSG:3857"), "EPSG:3857")),
+                    })
+                  ]
+              })}
+              style={
+                new Style({
+                  image: new Icon({
+                    anchor: [0.5, 16],
+                    anchorXUnits: 'fraction',
+                    anchorYUnits: 'pixels',
+                    width: 40,
+                    height: 40,
+                    src: Pin,
+                  })
+                })
+              }
+              zIndex={2}
+            />
             <VectorLayer
                 name={"userlocation"}
                 source={vector({
                     features: [positionFeature]
                 })}
                 style={
-                    new Style({
-                        image: new CircleStyle({
-                            radius: 50,
-                            fill: new Fill({
-                                color: 'rgba(22, 22, 22, 0.3)',
-                            }),
-                            stroke: new Stroke({
-                                color: '#626262',
-                                width: 5,
-                            }),
+                  new Style({
+                      image: new CircleStyle({
+                        radius: 50,
+                        fill: new Fill({
+                            color: 'rgba(22, 22, 22, 0.3)',
                         }),
-                    })
+                        stroke: new Stroke({
+                          color: "rgb(60, 60, 60)",
+                          width: 5
+                        }),
+                      })
+                  })
                 }
+                zIndex={1}
               />
         </Layers>
       </Map>

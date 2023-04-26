@@ -41,3 +41,30 @@
 .ant-form-item-label{
   padding: 0 0 5px;
 }
+
+.ant-pagination-simple-pager{
+  display: none !important;
+}
+
+.ant-pagination-prev>button>span{
+  color: rgb(102, 102, 102) !important;
+}
+
+.ant-pagination>li{
+  width: 49% !important;
+  height: 35px !important;
+  display: inline-flex !important;
+  align-items: center;
+}
+
+.ant-pagination>.ant-pagination-next{
+  background-color: rgb(98, 109, 75) !important;
+}
+
+.ant-pagination>.ant-pagination-simple-pager{
+  display: none !important;
+}
+
+.ant-pagination-next>button>span{
+  color: white !important;
+}
