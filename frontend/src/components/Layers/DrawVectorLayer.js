@@ -30,6 +30,7 @@ const DrawVectorLayer = ({ name, source, style, zIndex }) => {
 
 	useEffect(()=>{
 		if (!map) return;
+		clearLayer();
 		let vectorLayer = new VectorLayer({
 			name,
 			source,
@@ -56,13 +57,17 @@ const DrawVectorLayer = ({ name, source, style, zIndex }) => {
 		}
 	};
 
+	const clearLayer = () => {
+		map.getLayers().forEach((layer) => {
+			if (layer.get('name') === 'draw') {
+				layer.getSource().clear();
+			}
+		});
+	};
+
   useEffect(()=>{
 		if (isDraw) {
-			map.getLayers().forEach((layer) => {
-				if (layer.get('name') === 'draw') {
-					layer.getSource().clear();
-				}
-			})
+			clearLayer();
 			addInteraction();
 			setIsDraw(false);
 		}
