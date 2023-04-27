@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "build": "react-scripts build",
     "start": "cd frontend && yarn start",
     "server": "cd backend && yarn server"
   },
