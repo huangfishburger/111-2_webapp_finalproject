@@ -1,4 +1,4 @@
-import instance from "./../connection";
+import { instance } from "./../connection";
 
 export const getReverseGeocoding = async (lat, lon) => {
   const { data: { location } } = await instance.get('/getReverseGeocoding',

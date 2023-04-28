@@ -6,6 +6,8 @@ const API_PORT =
   : "http://localhost:4000/api"
 ;
 
-export const api = axios.create({
+const instance = axios.create({
   baseURL: API_PORT,
 });
+
+export { instance }
