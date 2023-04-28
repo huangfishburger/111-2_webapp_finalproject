@@ -1,9 +1,4 @@
-import axios from 'axios';
-//import { xml2json } from 'xml-js';
-
-const instance = axios.create({
-  baseURL: `http://localhost:4000/api`,
-});
+import instance from "./../connection";
 
 export const getReverseGeocoding = async (lat, lon) => {
   const { data: { location } } = await instance.get('/getReverseGeocoding',
