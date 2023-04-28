@@ -1,11 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { message } from 'antd';
 import MapContext from "./../../hook/MapContext";
 import { Vector as VectorLayer } from 'ol/layer.js';
 import Draw from 'ol/interaction/Draw.js';
-import Feature from "ol/Feature";
-import Point from "ol/geom/Point";
-import { vector } from "../Sources";
 
 const DrawVectorLayer = ({ name, source, style, zIndex }) => {
 	const { map, isDraw, setIsDraw, userCoord, setUserCoord } = useContext(MapContext);

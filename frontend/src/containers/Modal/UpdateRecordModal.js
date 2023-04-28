@@ -1,4 +1,4 @@
-import { Modal, Button, Checkbox, Form, Input, Tooltip, message, AutoComplete, Pagination, Card } from 'antd';
+import { Modal, Button, Form, Input, message, AutoComplete, Pagination, Card } from 'antd';
 import { EnvironmentFilled, PushpinFilled, GlobalOutlined, ExceptionOutlined } from '@ant-design/icons';
 import { useState, useContext, useEffect } from 'react';
 import MapContext from '../../hook/MapContext';

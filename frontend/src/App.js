@@ -1,19 +1,15 @@
 import './App.css';
-import styled from 'styled-components';
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import 'material-icons/iconfont/material-icons.css';
 import { Navbar } from './components/Navbar';
 import { IndexPage, EducatePage, RecordPage, ContactPage, FoundationPage } from './containers/Page';
 
-const { Footer, Content } = Layout;
+const { Content } = Layout;
 const contentStyle = {
   minHeight: 450,
   lineHeight: '120px',
   paddingInline: "3.5vw",
-};
-const footerStyle = {
-  height: 100,
 };
 
 function App() {

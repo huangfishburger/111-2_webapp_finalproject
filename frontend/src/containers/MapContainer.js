@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Button, Tooltip } from 'antd';
 import styled from 'styled-components';
 import { fromLonLat, toLonLat } from "ol/proj";
@@ -11,7 +11,6 @@ import { Icon, Circle as CircleStyle, Style, Fill, Stroke } from "ol/style";
 import { vector } from "../components/Sources";
 import Pin from './../data/pin.svg';
 import MapContext from "../hook/MapContext";
-import * as olTransform from 'ol/transform';
 
 const ViewButton = styled(Button)`
   position: absolute;

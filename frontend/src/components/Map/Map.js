@@ -3,7 +3,7 @@ import MapContext from "../../hook/MapContext";
 import * as ol from "ol";
 
 const Map = ({ children }) => {
-	const { map, mapRef, zoom, center, setCenter, setMap } = useContext(MapContext);
+	const { map, mapRef, zoom, center, setMap } = useContext(MapContext);
 
 	// on component mount
 	useEffect(() => {

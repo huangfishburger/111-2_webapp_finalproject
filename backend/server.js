@@ -1,9 +1,12 @@
 import express from 'express'
 import cors from 'cors'
 import routes from './routes';
+import dotenv from 'dotenv-defaults'
 
-const app = express()
+const app = express();
+require('dotenv-defaults').config();
 
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === "development"){
   app.use(cors());
 }
