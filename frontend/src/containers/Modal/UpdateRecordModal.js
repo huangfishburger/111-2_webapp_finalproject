@@ -2,8 +2,8 @@ import { Modal, Button, Form, Input, message, AutoComplete, Pagination, Card } f
 import { EnvironmentFilled, PushpinFilled, GlobalOutlined, ExceptionOutlined } from '@ant-design/icons';
 import { useState, useContext, useEffect } from 'react';
 import MapContext from '../../hook/MapContext';
-import Frog from "./../../data/frog.json";
-import Spot from "./../../data/scenic_spot_C_f.json";
+import Frog from "./../../assets/frog.json";
+import Spot from "./../../assets/scenic_spot_C_f.json";
 import { getReverseGeocoding } from '../../axios/';
 import { toLonLat } from 'ol/proj';
 import styled from 'styled-components';

@@ -9,7 +9,7 @@ import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
 import { Icon, Circle as CircleStyle, Style, Fill, Stroke } from "ol/style";
 import { vector } from "../components/Sources";
-import Pin from './../data/pin.svg';
+import Pin from './../assets/pin.svg';
 import MapContext from "../hook/MapContext";
 
 const ViewButton = styled(Button)`
