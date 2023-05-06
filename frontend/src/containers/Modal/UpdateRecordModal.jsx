@@ -4,7 +4,7 @@ import { useState, useContext, useEffect } from 'react';
 import MapContext from '../../hook/MapContext';
 import Frog from "./../../assets/frog.json";
 import Spot from "./../../assets/scenic_spot_C_f.json";
-import { getReverseGeocoding } from '../../axios/';
+import { getReverseGeocoding } from '../../axios';
 import { toLonLat } from 'ol/proj';
 import styled from 'styled-components';
 import { ImageUpload } from '../../components/ImageUpload';

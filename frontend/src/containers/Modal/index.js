@@ -1,5 +1,5 @@
-import { CommentModal } from "./CommentModal";
-import { UpdateRecordModal } from "./UpdateRecordModal";
+import { CommentModal } from "./CommentModal.jsx";
+import { UpdateRecordModal } from "./UpdateRecordModal.jsx";
 
 export {
 	CommentModal,
