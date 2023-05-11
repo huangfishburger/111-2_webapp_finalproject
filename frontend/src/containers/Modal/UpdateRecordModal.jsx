@@ -4,7 +4,7 @@ import { useState, useContext, useEffect } from 'react';
 import MapContext from '../../hook/MapContext';
 import Frog from "./../../assets/frog.json";
 import Spot from "./../../assets/scenic_spot_C_f.json";
-import { getReverseGeocoding } from '../../axios';
+import { getReverseGeocoding, createRecord } from '../../axios';
 import { toLonLat } from 'ol/proj';
 import styled from 'styled-components';
 import { ImageUpload } from '../../components/ImageUpload';
@@ -105,6 +105,12 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
     }
   }, [userPlaceName]);
   
+  /* HANDLE MODAL */
+  const handleCancel = () => {
+    setIsUpdateRecordModalOpen(false);
+  };
+
+  /* SPECIES DROPDOWN */
   const onSpeciesSearch = (val) => {
     let filtered = [];
     if (val) {
@@ -114,6 +120,12 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
     }
     setSpeciesOptions(filtered);
   };
+
+  const onSpeciesSelect = (val) => {
+    form.setFieldValue("speciesName", val);
+  };
+
+  /* LOCATION DROPDOWN */
   const onLocationSearch = (val) => {
     let filtered = [];
     if (val) {
@@ -123,9 +135,7 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
     };
     setLocationOptions(filtered);
   };
-  const handleCancel = () => {
-    setIsUpdateRecordModalOpen(false);
-  };
+
   const handleLocation = () => {
     setLocationType("user");
     map.getLayers().forEach((layer) => {
@@ -142,14 +152,19 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
       }
     })
   };
+
   const handleDraw = () => {
     setLocationType("draw");
     handleCancel();
     setIsDraw(true);
   };
+
+  /* HANDLE FORM SUMBIT */
   const onFinish = (values) => {
     message.success("💪🐸：感謝您的貢獻");
+    createRecord(values);
   };
+
   const onFinishFailed = (errorInfo) => {
     message.error("🐸💧：請再次確認您填寫的內容");
   };
@@ -168,7 +183,7 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
         labelCol={{span: 24,}}
         wrapperCol={{span: 24,}}
         initialValues={{
-          username: "王大明",
+          userName: "王大明",
           isAuthPulic: true,
           placeCoord: userCoord,
         }}
@@ -179,7 +194,7 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
         <div style={{display: (modalPage === 1)? "block": "none"}}>
           <Form.Item
             label="物種"
-            name="animalName"
+            name="speciesName"
             rules={[
               {
                 required: true,
@@ -191,6 +206,7 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
             <AutoComplete
               options={speciesOptions}
               onSearch={onSpeciesSearch}
+              onSelect={onSpeciesSelect}
             >
               <Input />
             </AutoComplete>
@@ -249,7 +265,7 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
 
         <Form.Item
           label="您的名字"
-          name="username"
+          name="userName"
           style={{display: (modalPage === 3)? "block": "none"}}
         >
           <Input />

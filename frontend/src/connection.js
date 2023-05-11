@@ -2,8 +2,8 @@ import axios from 'axios';
 
 const API_PORT = 
   (process.env.NODE_ENV === "production") ? 
-  "/api" 
-  : "http://localhost:4000/api"
+  "/" 
+  : "http://localhost:4000/"
 ;
 
 const instance = axios.create({

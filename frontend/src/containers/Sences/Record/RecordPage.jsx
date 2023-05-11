@@ -1,8 +1,8 @@
 import { Col, Row } from 'antd';
-import { Lists } from '../Lists';
-import { MapContainer } from '../MapContainer';
-import './../../css/RecordPage.css';
-import MapContext from '../../hook/MapContext';
+import { Lists } from './Lists';
+import { MapContainer } from './MapContainer';
+import './RecordPage.css';
+import MapContext from '../../../hook/MapContext';
 import React, { useRef, useState, useEffect } from "react";
 import { fromLonLat } from "ol/proj";
 

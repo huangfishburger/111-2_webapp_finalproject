@@ -2,15 +2,15 @@ import React, { useContext } from "react";
 import { Button, Tooltip } from 'antd';
 import styled from 'styled-components';
 import { fromLonLat, toLonLat } from "ol/proj";
-import { Map } from "../components/Map/Map";
-import { Layers, MapBoxLayer, VectorLayer, DrawVectorLayer } from "../components/Layers";
+import { Map } from "components/Map/Map";
+import { Layers, MapBoxLayer, VectorLayer, DrawVectorLayer } from "components/Layers";
 import Geolocation from 'ol/Geolocation.js';
 import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
 import { Icon, Circle as CircleStyle, Style, Fill, Stroke } from "ol/style";
-import { vector } from "../components/Sources";
-import Pin from './../assets/pin.svg';
-import MapContext from "../hook/MapContext";
+import { vector } from "components/Sources";
+import Pin from 'assets/pin.svg';
+import MapContext from "hook/MapContext";
 
 const ViewButton = styled(Button)`
   position: absolute;

@@ -1,7 +1,7 @@
 import { List } from 'antd';
 import styled from 'styled-components';
-import { ListItems } from '../components/ListItems';
-import { ListsHeader } from '../components/ListHeader';
+import { ListItems } from '../../../components/ListItems';
+import { ListsHeader } from '../../../components/ListHeader';
 
 const CustomizedLists = styled(List)`
   border: none;

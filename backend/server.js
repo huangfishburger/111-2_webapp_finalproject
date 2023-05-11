@@ -1,18 +1,20 @@
 import express from 'express'
 import cors from 'cors'
-import routes from './routes';
+import apiRountes from "./routes/api";
 import dotenv from 'dotenv-defaults'
+import db from "./db";
+import routes from './routes';
+import Record from './models/Record';
+import { records } from "./data/index.js";
 
+/* CONFIGURATIONS */
+dotenv.config();
 const app = express();
-require('dotenv-defaults').config();
+app.use(express.json());
 
-console.log(process.env.NODE_ENV);
-if (process.env.NODE_ENV === "development"){
-  app.use(cors());
-}
-
-app.use('/', routes);
-
+// DEVELOPMENT
+if (process.env.NODE_ENV === "development") app.use(cors());
+// PRODUCTION
 if (process.env.NODE_ENV === "production"){
   const __dirname = path.resolve();
   app.use(express.static(path.join(__dirname, "../frontend", "build")));
@@ -21,8 +23,12 @@ if (process.env.NODE_ENV === "production"){
   });
 }
 
-//defined serve
-const port = process.env.PORT || 4000
-app.listen(port, ()=>{
-  console.log(`Server is up on port ${port}.`)
-})
+/* ROUTES */
+app.use('/', routes);
+
+/* MONGOOSE SETUP */
+const PORT = process.env.PORT || 4000;
+db.connect();
+/* ADD DATA ONE TIME */
+//Record.insertMany(records);
+app.listen(PORT, () => {console.log(`Server is up on port ${PORT}.`)});
