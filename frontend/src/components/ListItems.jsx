@@ -3,6 +3,7 @@ import { StatusTag } from "./Tags";
 import { ActionButton } from "./ActionButton";
 import { CommentModal } from "../containers/Modal"
 import { useState } from "react";
+import { BiDotsHorizontalRounded, BiCommentDetail } from 'react-icons/bi';
 
 const listItemsStyle = {
   height: "max-content",
@@ -45,20 +46,20 @@ const ListItems = ({ item }) => {
   };
 
   const author = 
-    (item.author === undefined) ? "間諜🐸": item.author
+    (item.userName === undefined) ? "間諜🐸": item.userName
 
   const text = 
-    (item.text === undefined) ? "🐸：…": 
+    (item.post === undefined) ? "🐸：…": 
       <div>
         <div style={{fontWeight: "700", marginBottom: "3px", display: "flex", alignItems: "center"}}>
           {author}
         </div>
-        <div>{item.text}</div>
+        <div>{item.post}</div>
       </div>
 
   const context = 
     <>
-      {text} <div style={timestampTextStyle}>5:20PM | 04.08 2023</div>
+      {text} <div style={timestampTextStyle}>{item.updatedAt}</div>
     </>
   
   return (
@@ -69,7 +70,7 @@ const ListItems = ({ item }) => {
         ghost
         collapsible="icon"
         expandIcon={() => 
-          <ActionButton icon={"more_horiz"} />
+          <ActionButton icon={<BiDotsHorizontalRounded />} />
         }
       >
         <Panel 
@@ -83,16 +84,16 @@ const ListItems = ({ item }) => {
                 />
                 <div style={listItemsTextStyle}>
                   <div style={nameTextStyle}>
-                    {item.name}
+                    {item.userName}
                     <StatusTag status={item.status}/>
                   </div>
                   <div style={subNameTextStyle}>
-                    {item.place_name}
+                    {item.placeName}
                   </div>
                 </div>
               </div>
               <div style={{display: "flex", alignItems: "center"}}>
-                <ActionButton icon={"comment"} onClickEvent={handleCommentModalOpen}/>
+                <ActionButton icon={<BiCommentDetail />} onClickEvent={handleCommentModalOpen}/>
                 <div style={{width: "32px", height: "32px", display: "inline-flex"}}></div>
               </div> 
             </div>
@@ -104,7 +105,7 @@ const ListItems = ({ item }) => {
         </Panel>
       </Collapse>
       <CommentModal 
-        title={item.name}
+        title={item.userName}
         context={context}
         isCommentModalOpen={isCommentModalOpen} 
         setIsCommentModalOpen={setIsCommentModalOpen} 

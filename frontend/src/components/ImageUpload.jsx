@@ -37,7 +37,7 @@ const ImageUpload = () => {
         onChange={onChange}
         onPreview={onPreview}
       >
-        {fileList.length < 5 && '+ Upload'}
+        {fileList.length < 1 && '+ Upload'}
       </Upload>
     </ImgCrop>
   );

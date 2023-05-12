@@ -1,7 +1,9 @@
 import { List } from 'antd';
 import styled from 'styled-components';
-import { ListItems } from '../../../components/ListItems';
-import { ListsHeader } from '../../../components/ListHeader';
+import { ListItems } from 'components/ListItems';
+import { ListsHeader } from 'components/ListHeader';
+import { useEffect, useState } from 'react';
+import { getRecords } from './../../../axios';
 
 const CustomizedLists = styled(List)`
   border: none;
@@ -29,12 +31,23 @@ const data = [
 ];
 
 const Lists = () => {
+  const [ records, setRecords ] = useState([]);
+
+  const getData = async () => {
+    const data = await getRecords();
+    setRecords(data);
+  };
+  
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <div>
       <CustomizedLists
         header={<ListsHeader />}
         bordered
-        dataSource={data}
+        dataSource={records}
         renderItem={(item) => (
           <List.Item>
             <ListItems item={item} />

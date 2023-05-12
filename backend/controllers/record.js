@@ -6,6 +6,7 @@ export const createReocrd = async (req, res) => {
       userId, 
       userName,
       species, 
+      hashtage,
       coords,
       placeName,
       post,
@@ -18,6 +19,7 @@ export const createReocrd = async (req, res) => {
       userId,
       userName,
       species,
+      hashtage,
       coords: {
         type: 'Point',
         coordinates: coords
@@ -31,16 +33,16 @@ export const createReocrd = async (req, res) => {
 
     await newRecord.save();
 
-    const record = await Record.find(); // return all records
+    const record = await Record.find({ authorized: { $eq: true } });
     res.status(201).json(record);
   } catch (err) {
     res.status(409).json({ message: err.message });
   }
 }
 
-export const getAllRecord = async () => {
+export const getRecords = async (_, res) => {
   try {
-    const record = await Record.find(); // return all records
+    const record = await Record.find({ authorized: { $eq: true } }); 
     res.status(200).json(record);
   } catch (err) {
     res.status(404).json({ message: err.message });

@@ -1,8 +1,7 @@
 import './App.css';
 import { Layout } from 'antd';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import 'material-icons/iconfont/material-icons.css';
-import { Navbar } from './components/Navbar';
+import { Navbar } from './containers/Navbar';
 import { IndexPage, EducatePage, RecordPage, ContactPage, FoundationPage } from './containers/Sences';
 
 const { Content } = Layout;

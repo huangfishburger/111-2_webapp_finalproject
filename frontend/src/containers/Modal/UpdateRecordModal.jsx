@@ -1,13 +1,15 @@
-import { Modal, Button, Form, Input, message, AutoComplete, Pagination, Card } from 'antd';
+import { Modal, Button, Form, Input, message, AutoComplete, Pagination } from 'antd';
 import { EnvironmentFilled, PushpinFilled, GlobalOutlined, ExceptionOutlined } from '@ant-design/icons';
+import { FiMap, FiMinusCircle, FiAlertTriangle, FiCrosshair, FiHash } from "react-icons/fi";
 import { useState, useContext, useEffect } from 'react';
-import MapContext from '../../hook/MapContext';
-import Frog from "./../../assets/frog.json";
-import Spot from "./../../assets/scenic_spot_C_f.json";
-import { getReverseGeocoding, createRecord } from '../../axios';
+import MapContext from 'hook/MapContext';
+import Frog from "assets/frog.json";
+import Spot from "assets/scenic_spot_C_f.json";
+import { getReverseGeocoding, createRecord } from './../../axios';
 import { toLonLat } from 'ol/proj';
 import styled from 'styled-components';
-import { ImageUpload } from '../../components/ImageUpload';
+import { ImageUpload } from 'components/ImageUpload';
+import { OptionCard } from 'components/OptionCard';
 
 const coordTextStyle = {
   fontWeight: "400", 
@@ -38,35 +40,19 @@ const ModalFooter = styled.div`
   justify-content: center;
   padding-top: 25px;
 `;
-const OptionCard = styled(Card)`
-  width: 48%;
-  font-size: xx-small; 
-  border-color: #D9D9D9;
-  color: rgb(102, 102, 102);
-  &:hover{
-    color: #161616;
-    outline: 1px solid #161616;
-  }
-  &.active{
-    color: rgb(98, 109, 75);
-    outline: 1.5px solid rgb(98, 109, 75);
-  }
-  &>div{
-    text-align: center;
-    fontWeight: 400;
-    margin: 10px 0;
-  }
-  & .anticon{
-    font-size: x-large;
-    height: 40px;
-  }
-`;
 
 const SubText = styled.div`
   font-weight: 400;
   font-size: xx-small; 
   margin: 10px 0;
   color: rgb(102, 102, 102);
+`;
+
+const OptionCardRow = styled.div`
+  display: flex;
+  margin: 1rem 0;
+  justifyContent: space-between;
+  gap: 0.5rem;
 `;
 
 const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen }) => {
@@ -104,6 +90,14 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
       setLocationOptions([options[0], options[1], options[2]]); 
     }
   }, [userPlaceName]);
+
+  useEffect(() => {
+    if (recordType === "public") {
+      form.setFieldValue("isAuthPulic", true);
+    } else {
+      form.setFieldValue("isAuthPulic", false);
+    }
+  }, [recordType]);
   
   /* HANDLE MODAL */
   const handleCancel = () => {
@@ -191,7 +185,49 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <div style={{display: (modalPage === 1)? "block": "none"}}>
+         <div style={{display: (modalPage === 1)? "block": "none"}}>
+          <Form.Item
+            label="分類"
+            name="hashtag"
+          >
+            <OptionCardRow>
+              <OptionCard 
+                className={(locationType === "user")? "active": ""}
+                onClick={handleLocation}
+                icon={<FiMap />}
+                text={"蛙調"}
+              />
+              <OptionCard 
+                className={(locationType === "draw")? "active": ""}
+                onClick={handleDraw}
+                icon={<FiAlertTriangle />}
+                text={"待移除"}
+              />
+              <OptionCard 
+                className={(locationType === "draw")? "active": ""}
+                onClick={handleDraw}
+                icon={<FiMinusCircle />}
+                text={"移除"}
+              />
+            </OptionCardRow>
+            <OptionCardRow>
+              <OptionCard
+                className={(locationType === "draw")? "active": ""}
+                onClick={handleDraw}
+                icon={<FiCrosshair />}
+                text={"詢問"}
+              />
+              <OptionCard
+                className={(locationType === "draw")? "active": ""}
+                onClick={handleDraw}
+                icon={<FiHash />}
+                text={"其他"}
+              />
+            </OptionCardRow>
+          </Form.Item>
+        </div>
+
+        <div style={{display: (modalPage === 2)? "block": "none"}}>
           <Form.Item
             label="物種"
             name="speciesName"
@@ -201,7 +237,6 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
                 message: '請輸入您所發現的物種!',
               },
             ]}
-            style={{display: (modalPage === 1)? "block": "none"}}
           >
             <AutoComplete
               options={speciesOptions}
@@ -220,7 +255,7 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
           </Form.Item>
         </div>
 
-        <div style={{display: (modalPage === 2)? "block": "none"}}>
+        <div style={{display: (modalPage === 3)? "block": "none"}}>
           <Form.Item
             label={"發現地點"}
             name="placeCoord"
@@ -232,16 +267,20 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
             ]}
           >
             <SubText>您發現物種之地點坐標</SubText>
-            <div style={{display: "flex", marginBottom: "20px", justifyContent: "space-between"}}>
-              <OptionCard className={(locationType === "user")? "active": ""} onClick={handleLocation}>
-                <div><EnvironmentFilled /></div>
-                <div>{"參考您目前所在位置"}</div>
-              </OptionCard>
-              <OptionCard className={(locationType === "draw")? "active": ""} onClick={handleDraw}>
-                <div><PushpinFilled /></div>
-                <div>{"在地圖上繪製您所在地"}</div>
-              </OptionCard>
-            </div>
+            <OptionCardRow>
+              <OptionCard 
+                className={(locationType === "user")? "active": ""}
+                onClick={handleLocation}
+                icon={<EnvironmentFilled />}
+                text={"參考您目前所在位置"}
+              />
+              <OptionCard 
+                className={(locationType === "draw")? "active": ""}
+                onClick={handleDraw}
+                icon={<PushpinFilled />}
+                text={"在地圖上繪製您所在地"}
+              />
+            </OptionCardRow>
           </Form.Item>
           <SubText>您發現物種之地點名稱</SubText>
           <Form.Item
@@ -266,7 +305,7 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
         <Form.Item
           label="您的名字"
           name="userName"
-          style={{display: (modalPage === 3)? "block": "none"}}
+          style={{display: (modalPage === 4)? "block": "none"}}
         >
           <Input />
         </Form.Item>
@@ -274,7 +313,7 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
         <Form.Item
           label="有什麼想說的..."
           name="context"
-          style={{display: (modalPage === 3)? "block": "none"}}
+          style={{display: (modalPage === 4)? "block": "none"}}
         >
           <Input.TextArea />
         </Form.Item>
@@ -282,7 +321,7 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
         <Form.Item
           label="分享對象"
           name="isAuthPulic"
-          style={{display: (modalPage === 4)? "block": "none"}}     
+          style={{display: (modalPage === 5)? "block": "none"}}     
           rules={[
             {
               required: true,
@@ -290,29 +329,33 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
             },
           ]}
         >
-          <div style={{display: "flex", marginBottom: "20px", justifyContent: "space-between"}}>
-            <OptionCard className={(recordType === "public")? "active": ""} onClick={()=>setRecordType("public")}>
-              <div><GlobalOutlined /></div>
-              <div>{"公開顯示發現紀錄、地點與貼文給所有人"}</div>
-            </OptionCard>
-            <OptionCard className={(recordType === "private")? "active": ""} onClick={()=>setRecordType("private")}>
-              <div><ExceptionOutlined /></div>
-              <div>{"僅顯示發現紀錄、地點與貼文給志工團隊"}</div>
-            </OptionCard>
-          </div>
+          <OptionCardRow>
+            <OptionCard 
+              className={(recordType === "public")? "active": ""} 
+              onClick={()=>setRecordType("public")}
+              icon={<GlobalOutlined />}
+              text={"公開顯示發現紀錄、地點與貼文給所有人"}
+            />
+            <OptionCard 
+              className={(recordType === "private")? "active": ""} 
+              onClick={()=>setRecordType("private")}
+              icon={<ExceptionOutlined />}
+              text={"僅顯示發現紀錄、地點與貼文給志工團隊"}
+            />
+          </OptionCardRow>
         </Form.Item>
           
         <ModalFooter>
           <Pagination simple 
             defaultCurrent={modalPage} 
-            total={40} 
+            total={50} 
             onChange={(page) => {setModelPage(page)}}
             style={{width: "100%", position: "relative"}}
           />
           <Form.Item
-            style={{display: (modalPage === 4)? "block": "none", width: "100%"}}
+            style={{display: (modalPage === 5)? "block": "none", width: "100%"}}
           >
-            <Button type="primary" htmlType="submit" style={{height: "40px"}}>
+            <Button type="primary" htmlType="submit" style={{height: "40px", marginInlineStart: "8px"}}>
               送出
             </Button>
           </Form.Item>

@@ -5,6 +5,7 @@ export const createRecord = async ( formObject ) => {
     userId: null,
     userName: formObject.userName,
     species: formObject.speciesName,
+    hashtage: formObject.hashtage,
     coords: formObject.placeCoord,
     placeName: formObject.placeName,
     post: formObject.context,
@@ -12,5 +13,6 @@ export const createRecord = async ( formObject ) => {
     authorized: formObject.isAuthPulic,
   });
 
+  // console.log(data);
   return data
 } 

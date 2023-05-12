@@ -1,6 +1,8 @@
 import { Select, Button, Tooltip } from 'antd';
 import { UpdateRecordModal } from '../containers/Modal';
 import { useState } from 'react';
+import { IoAddOutline } from 'react-icons/io5';
+import { HiSortDescending } from 'react-icons/hi';
 import { tagRender } from './Tags';
 import { ActionButton } from './ActionButton';
 
@@ -54,11 +56,11 @@ const ListsHeader = () => {
         />
       </Tooltip>
       <Tooltip title="依照時間排序" >
-        <ActionButton icon={"sort"} />
+        <ActionButton icon={<HiSortDescending />} />
       </Tooltip>
       <Tooltip title="回報紀錄" >
         <Button type="primary" onClick={showModal} style={{width: "64px", height: "30px"}}>
-          <span className="material-icons-round">add</span>
+          <IoAddOutline />
         </Button>
       </Tooltip>
       <UpdateRecordModal isUpdateRecordModalOpen={isUpdateRecordModalOpen} setIsUpdateRecordModalOpen={setIsUpdateRecordModalOpen} />
