@@ -1,7 +1,9 @@
-import { Modal, Input, Image, Tag, Collapse } from 'antd';
+import { Modal, Input, Image, Form, Collapse, message } from 'antd';
 import { useState, useRef } from 'react';
 import Draggable from 'react-draggable';
 import styled from 'styled-components';
+import { CommentItem } from 'components/CommentItem';
+import { createRecordComments, addCommentLikes } from './../../../../axios';
 
 const { Panel } = Collapse;
 
@@ -19,53 +21,8 @@ const CommentPost = styled(Collapse)`
   }
 `;
 
-const CommentItem = styled.div`
-  max-width: 100%;
-  display: flex;
-  padding: 12px 3px;
-`;
-
-const CommentText = styled.div`
-  width: max-content;
-  max-width: calc(100% - 100px);
-  border-radius: 8px;
-  margin-left: 5px;
-  padding: 0 10px;
-  color: #161616;
-  &>.header{
-    display: flex;
-    align-items: center;
-  }
-  &>.header>.author{
-    font-weight: 700;
-    font-size: small;
-  }
-  &>.header>.time{
-    font-weight: 400;
-    font-size: xx-small; 
-    margin-left: 5px;
-    color: rgb(102, 102, 102);
-  }
-  &>.context{
-    font-size: x-small;
-    height: max-content;
-    max-height: 60px;
-    overflow-y: scroll;
-  }
-  &>.comment-tag{
-    font-size: xx-small;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 10px;
-    margin-top: 5px;
-    width: max-content;
-    max-width: 80px;
-    color: rgb(102, 102, 102);
-  }
-`;
-
-const CommentModal = ({ title, context, isCommentModalOpen, setIsCommentModalOpen }) => {
+const CommentModal = ({ title, postId, context, isCommentModalOpen, setIsCommentModalOpen, comments, setComments, userName }) => {
+  const [ form ] = Form.useForm();
   const [disabled, setDisabled] = useState(false);
   const [bounds, setBounds] = useState({
     left: 0,
@@ -74,6 +31,8 @@ const CommentModal = ({ title, context, isCommentModalOpen, setIsCommentModalOpe
     right: 0,
   });
   const draggleRef = useRef(null);
+
+  /* MODAL DROPABLE */
   const handleCancel = (e) => {
     setIsCommentModalOpen(false);
   };
@@ -89,6 +48,24 @@ const CommentModal = ({ title, context, isCommentModalOpen, setIsCommentModalOpe
       top: -targetRect.top + uiData.y,
       bottom: clientHeight - (targetRect.bottom - uiData.y),
     });
+  };
+
+  /* HANDLE FORM SUMBIT */
+  const onFinish = async (values) => {
+    message.success("💪🐸：感謝您的貢獻");
+    const data = await createRecordComments(values);
+    setComments(data);
+  };
+
+  const onFinishFailed = () => {
+    message.error("🐸💧：您沒有輸入任何內容");
+  };
+
+  /* LIKES */
+  const handleClick = async (commentId) => {
+    const userId = 1; // need to replace!!!
+    const data = await addCommentLikes(postId, commentId, userId);
+    setComments(data);
   };
 
   return (
@@ -121,7 +98,33 @@ const CommentModal = ({ title, context, isCommentModalOpen, setIsCommentModalOpe
             style={{borderRadius: "50%"}}
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           />：
-          <Input />
+          <Form
+            form={form}
+            name="comment"
+            initialValues={{
+              postId: postId,
+              userName: userName,
+            }}
+            labelCol={{span: 24,}}
+            wrapperCol={{span: 24,}}
+            style={{ width: "100%" }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+          >
+            <Form.Item name="postId" style={{ display: "none" }}/>
+            <Form.Item name="userName" style={{ display: "none" }}/>
+            <Form.Item
+              name="comment"
+              rules={[
+                {
+                  required: true,
+                  message: '請輸入您的留言!',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+          </Form>
         </div>
       }
       onCancel={handleCancel}
@@ -144,86 +147,18 @@ const CommentModal = ({ title, context, isCommentModalOpen, setIsCommentModalOpe
             <p>{context}</p>
           </Panel>
         </CommentPost>
-        <CommentItem>
-          <Image
-            width={35}
-            style={{borderRadius: "50%", marginTop: "4px"}}
-            src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          />
-          <CommentText>
-            <div className='header'>
-              <span className='author'>間諜青蛙</span>
-              <span className='time'>5:20PM | 04.08 2023</span>
-            </div>
-            <div className='context'>HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH</div>
-            <Tag
-              className="comment-tag"
-              color={"rgb(238, 238, 238)"}
-            >
-              🌿
-            </Tag>
-          </CommentText>
-        </CommentItem>
-        <CommentItem>
-          <Image
-            width={35}
-            style={{borderRadius: "50%", marginTop: "4px"}}
-            src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          />
-          <CommentText>
-            <div className='header'>
-              <span className='author'>間諜青蛙</span>
-              <span className='time'>5:20PM | 04.08 2023</span>
-            </div>
-            <div className='context'>HHHHHHHHHHHHHHH</div>
-            <Tag
-              className="comment-tag"
-              color={"rgb(238, 238, 238)"}
-            >
-              ☘
-            </Tag>
-          </CommentText>
-        </CommentItem>
-        <CommentItem>
-          <Image
-            width={35}
-            style={{borderRadius: "50%", marginTop: "4px"}}
-            src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          />
-          <CommentText>
-            <div className='header'>
-              <span className='author'>間諜青蛙</span>
-              <span className='time'>5:20PM | 04.08 2023</span>
-            </div>
-            <div className='context'>HHHHHHHHHHHHHHH</div>
-            <Tag
-              className="comment-tag"
-              color={"rgb(238, 238, 238)"}
-            >
-              🍀
-            </Tag>
-          </CommentText>
-        </CommentItem>
-        <CommentItem>
-          <Image
-            width={35}
-            style={{borderRadius: "50%", marginTop: "4px"}}
-            src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          />
-          <CommentText>
-            <div className='header'>
-              <span className='author'>間諜青蛙</span>
-              <span className='time'>5:20PM | 04.08 2023</span>
-            </div>
-            <div className='context'>HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH</div>
-            <Tag
-              className="comment-tag"
-              color={"rgb(238, 238, 238)"}
-            >
-              🌱
-            </Tag>
-          </CommentText>
-        </CommentItem>
+        { comments.map(( comment ) => {
+            return (
+              <CommentItem
+                userName={comment.userName}
+                timeStamp={comment.createdAt}
+                comment={comment.comment}
+                likes={comment.likes}
+                handleClick={() => handleClick(comment._id)}
+              />
+            )
+          })
+        }
       </CommentContainer>
     </Modal>
   );

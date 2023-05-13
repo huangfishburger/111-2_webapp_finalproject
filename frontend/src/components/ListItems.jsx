@@ -2,8 +2,9 @@ import { Image, Collapse } from "antd";
 import { StatusTag } from "./Tags";
 import { ActionButton } from "./ActionButton";
 import { CommentModal } from "../containers/Sences/Record/Modal"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiDotsHorizontalRounded, BiCommentDetail } from 'react-icons/bi';
+import { getRecordComments } from "./../axios";
 
 const listItemsStyle = {
   height: "max-content",
@@ -40,13 +41,14 @@ const { Panel } = Collapse;
 
 const ListItems = ({ item }) => {
   const [ isCommentModalOpen, setIsCommentModalOpen ] = useState(false);
+  const [ comments, setComments ] = useState([]);
 
   const handleCommentModalOpen = () => {
     setIsCommentModalOpen(!isCommentModalOpen);
   };
 
   const author = 
-    (item.userName === undefined) ? "間諜🐸": item.userName
+    (item.userName === undefined) ? "間諜🐸": item.userName;
 
   const text = 
     (item.post === undefined) ? "🐸：…": 
@@ -55,12 +57,22 @@ const ListItems = ({ item }) => {
           {author}
         </div>
         <div>{item.post}</div>
-      </div>
+      </div>;
 
   const context = 
     <>
       {text} <div style={timestampTextStyle}>{item.updatedAt}</div>
-    </>
+    </>;
+
+  /* GET DATA */
+  useEffect(() => {
+    const fetchComments = async () => {
+      const comments = await getRecordComments(item._id);
+      setComments(comments);
+    };
+
+    fetchComments();
+  }, [isCommentModalOpen]);
 
   return (
     <>
@@ -111,9 +123,13 @@ const ListItems = ({ item }) => {
       </Collapse>
       <CommentModal 
         title={item.userName}
+        postId={item._id}
         context={context}
         isCommentModalOpen={isCommentModalOpen} 
         setIsCommentModalOpen={setIsCommentModalOpen} 
+        comments={comments}
+        setComments={setComments}
+        userName={"間諜鴕鳥"}
       />
     </>
   );

@@ -13,6 +13,5 @@ export const createRecord = async ( formObject ) => {
     authorized: formObject.isAuthPulic,
   });
 
-  // console.log(data);
   return data
 } 
