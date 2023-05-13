@@ -5,7 +5,7 @@ export const createRecord = async ( formObject ) => {
     userId: null,
     userName: formObject.userName,
     species: formObject.speciesName,
-    hashtage: formObject.hashtage,
+    hashtag: formObject.hashtag,
     coords: formObject.placeCoord,
     placeName: formObject.placeName,
     post: formObject.context,

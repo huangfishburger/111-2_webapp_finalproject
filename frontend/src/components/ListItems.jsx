@@ -1,7 +1,7 @@
 import { Image, Collapse } from "antd";
 import { StatusTag } from "./Tags";
 import { ActionButton } from "./ActionButton";
-import { CommentModal } from "../containers/Modal"
+import { CommentModal } from "../containers/Sences/Record/Modal"
 import { useState } from "react";
 import { BiDotsHorizontalRounded, BiCommentDetail } from 'react-icons/bi';
 
@@ -61,7 +61,7 @@ const ListItems = ({ item }) => {
     <>
       {text} <div style={timestampTextStyle}>{item.updatedAt}</div>
     </>
-  
+
   return (
     <>
       <Collapse 
@@ -74,9 +74,12 @@ const ListItems = ({ item }) => {
         }
       >
         <Panel 
+          id={item._id}
           header={
             <div style={listItemsStyle}>
-              <div style={nameTextStyle}>
+              <div 
+                style={nameTextStyle}
+              >
                 <Image
                   width={50}
                   style={{borderRadius: "5px"}}
@@ -84,8 +87,10 @@ const ListItems = ({ item }) => {
                 />
                 <div style={listItemsTextStyle}>
                   <div style={nameTextStyle}>
-                    {item.userName}
-                    <StatusTag status={item.status}/>
+                    {item.species}
+                    {item.hashtag.map((hashtag) => {
+                      return (<StatusTag status={hashtag}/>)
+                    })}
                   </div>
                   <div style={subNameTextStyle}>
                     {item.placeName}

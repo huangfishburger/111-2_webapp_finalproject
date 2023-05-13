@@ -25,9 +25,12 @@ const MyCard = styled(Card)`
   }
 `;
 
-const OptionCard = ({ icon, text }) => {
+const OptionCard = ({ className, onClick, icon, text }) => {
   return (
-    <MyCard>
+    <MyCard
+      className={className}
+      onClick={onClick}
+    >
       <div 
         style={{
           fontSize: "1rem",

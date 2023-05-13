@@ -2,7 +2,7 @@ import { Col, Row } from 'antd';
 import { Lists } from './Lists';
 import { MapContainer } from './MapContainer';
 import './css/RecordPage.css';
-import MapContext from '../../../hook/MapContext';
+import MapContext from 'hook/MapContext';
 import React, { useRef, useState, useEffect } from "react";
 import { fromLonLat } from "ol/proj";
 
@@ -25,6 +25,7 @@ const RecordPage = () => {
   const [ zoom, setZoom ] = useState(7);
   const [ isDraw, setIsDraw ] = useState(false);
   const [ userCoord, setUserCoord ] = useState([]);
+  const [ recordCoords, setRecordCoords ] = useState([]);
 
   //const { stepsAndGeoJSON, showSteps, showAllFeactures } = useContext(MapContext);
   //const [ loading1, setloading1 ] = useState(false)
@@ -47,7 +48,23 @@ const RecordPage = () => {
   }, [windowSize]);
 
   return (
-    <MapContext.Provider value={{ map, mapRef, zoom, center, setCenter, setMap, setZoom, isDraw, setIsDraw, userCoord, setUserCoord }}>
+    <MapContext.Provider value={
+      { 
+        map, 
+        mapRef, 
+        zoom, 
+        center, 
+        setCenter, 
+        setMap, 
+        setZoom, 
+        isDraw, 
+        setIsDraw, 
+        userCoord, 
+        setUserCoord,
+        recordCoords,
+        setRecordCoords, 
+      }
+    }>
        <Row style={gridStyle}>
         <Col xs={24} md={12} style={{display: (mapView)? "none": "block"}}>
           <Lists />

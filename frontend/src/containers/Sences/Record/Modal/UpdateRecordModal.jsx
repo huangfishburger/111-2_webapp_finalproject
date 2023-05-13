@@ -5,7 +5,7 @@ import { useState, useContext, useEffect } from 'react';
 import MapContext from 'hook/MapContext';
 import Frog from "assets/frog.json";
 import Spot from "assets/scenic_spot_C_f.json";
-import { getReverseGeocoding, createRecord } from './../../axios';
+import { getReverseGeocoding, createRecord } from '../../../../axios';
 import { toLonLat } from 'ol/proj';
 import styled from 'styled-components';
 import { ImageUpload } from 'components/ImageUpload';
@@ -55,10 +55,11 @@ const OptionCardRow = styled.div`
   gap: 0.5rem;
 `;
 
-const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen }) => {
+const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen, setRecords }) => {
   const { map, setCenter, setZoom, setIsDraw, userCoord, setUserCoord } = useContext(MapContext);
   const [ userPlaceName, setUserPlaceName ] = useState([]);
   const [ modalPage, setModelPage ] = useState(1);
+  const [ hashtagTypes, setHashtagTypes ] = useState([]);
   const [ locationType, setLocationType ] = useState("");
   const [ recordType, setRecordType ] = useState("public");
   const [ speciesOptions, setSpeciesOptions ] = useState(speciesDataSource);
@@ -153,10 +154,27 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
     setIsDraw(true);
   };
 
+  const handleHashtage = (index) => {
+    if (hashtagTypes.includes(index)){
+      var temp = [...hashtagTypes];
+      var array_index = temp.indexOf(index);
+      if (array_index > -1) temp.splice(array_index, 1); 
+      setHashtagTypes(temp);
+    } else {
+      setHashtagTypes([...hashtagTypes, index]);
+    }
+  };
+
+  useEffect(() => {
+    form.setFieldValue("hashtag", hashtagTypes);
+  }, [hashtagTypes]);
+
   /* HANDLE FORM SUMBIT */
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     message.success("💪🐸：感謝您的貢獻");
-    createRecord(values);
+    const data = await createRecord(values);
+    setRecords(data);
+    setIsUpdateRecordModalOpen(false);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -192,34 +210,34 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
           >
             <OptionCardRow>
               <OptionCard 
-                className={(locationType === "user")? "active": ""}
-                onClick={handleLocation}
+                className={(hashtagTypes.includes(1))? "active": ""}
+                onClick={() => handleHashtage(1)}
                 icon={<FiMap />}
                 text={"蛙調"}
               />
               <OptionCard 
-                className={(locationType === "draw")? "active": ""}
-                onClick={handleDraw}
+                className={(hashtagTypes.includes(2))? "active": ""}
+                onClick={() => handleHashtage(2)}
                 icon={<FiAlertTriangle />}
                 text={"待移除"}
               />
               <OptionCard 
-                className={(locationType === "draw")? "active": ""}
-                onClick={handleDraw}
+                className={(hashtagTypes.includes(3))? "active": ""}
+                onClick={() => handleHashtage(3)}
                 icon={<FiMinusCircle />}
                 text={"移除"}
               />
             </OptionCardRow>
             <OptionCardRow>
               <OptionCard
-                className={(locationType === "draw")? "active": ""}
-                onClick={handleDraw}
+                className={(hashtagTypes.includes(4))? "active": ""}
+                onClick={() => handleHashtage(4)}
                 icon={<FiCrosshair />}
                 text={"詢問"}
               />
               <OptionCard
-                className={(locationType === "draw")? "active": ""}
-                onClick={handleDraw}
+                className={(hashtagTypes.includes(0))? "active": ""}
+                onClick={() => handleHashtage(0)}
                 icon={<FiHash />}
                 text={"其他"}
               />

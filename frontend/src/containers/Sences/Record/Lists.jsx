@@ -1,9 +1,15 @@
 import { List } from 'antd';
 import styled from 'styled-components';
 import { ListItems } from 'components/ListItems';
-import { ListsHeader } from 'components/ListHeader';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { getRecords } from './../../../axios';
+import { Select, Button, Tooltip } from 'antd';
+import { UpdateRecordModal } from 'containers/Sences/Record/Modal';
+import { IoAddOutline } from 'react-icons/io5';
+import { HiSortDescending } from 'react-icons/hi';
+import { tagRender } from 'components/Tags';
+import { ActionButton } from 'components/ActionButton';
+import MapContext from "hook/MapContext";
 
 const CustomizedLists = styled(List)`
   border: none;
@@ -12,27 +18,45 @@ const CustomizedLists = styled(List)`
   padding-top: 35px;
 `;
 
-const data = [
-  {'name': "黑眶蟾蜍", "place_name": "關渡自然公園", "status": "蛙調", "text": " 從上週五開始，今年學校首輪的黑眶趴踢開始了。這幾天晚上我都會跟朋友去幫牠們拍照，也見證了水池裡的卵串從無到滿滿都是的過程。\
-  然後就在剛剛，我們拎起了一隻公黑眶並置於手上想觀察除了捏腋下之外還有什麼情況牠會發出釋放叫聲。結果這時，黑眶從手掌心慢慢的往手臂上爬，爬啊爬....然後就突然伏下身不動了。\
-  等了一會兒，我跟朋朋發現這個姿勢有點眼熟，手臂晃了晃牠也沒有要放開的意思，才發現原來牠把我朋友的手當成母蛙死死的抱住了😅😅剛好也順便觀察到黑眶的婚刺（*注1）是如何起到作用的，真的是牢牢的抱住手臂🤣\
-  到底要單身多久才有辦法饑不擇食到這種程度啊XDD超級好笑，之後我們也有撈幾隻公蛙來嘗試，結果牠們都拼命想逃離五指山，看來只有這隻不挑食呢（？？"},
-  {'name': "太田樹蛙", "place_name": "五寮尖", "status": "待移除"},
-  {'name': "拉都希氏赤蛙", "place_name": "竹山", "status": "已移除"},
-  {'name': "黑眶蟾蜍", "place_name": "關渡自然公園", "status": "詢問"},
-  {'name': "黑眶蟾蜍", "place_name": "關渡自然公園", "status": "蛙調"},
-  {'name': "黑眶蟾蜍", "place_name": "關渡自然公園", "status": "蛙調"},
-  {'name': "黑眶蟾蜍", "place_name": "關渡自然公園", "status": "蛙調"},
-  {'name': "太田樹蛙", "place_name": "五寮尖", "status": "待移除"},
-  {'name': "拉都希氏赤蛙", "place_name": "竹山", "status": "已移除"},
-  {'name': "黑眶蟾蜍", "place_name": "關渡自然公園", "status": "詢問"},
-  {'name': "黑眶蟾蜍", "place_name": "關渡自然公園", "status": "蛙調"},
-  {'name': "黑眶蟾蜍", "place_name": "關渡自然公園", "status": "蛙調"},
-];
+const options = [
+  {
+    key: '1',
+    label: '全部',
+    value: "all",
+  },
+  {
+    key: '2',
+    label: '蛙調',
+    value: "frogSurvey",
+  },
+  {
+    key: '3',
+    label: '待移除',
+    value: "remove",
+  },
+  {
+    key: '4',
+    label: '已移除',
+    value: "removed",
+  },
+  {
+    key: '5',
+    label: '詢問',
+    value: "question",
+  }
+]
 
 const Lists = () => {
   const [ records, setRecords ] = useState([]);
+  const [ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen ] = useState(false);
+  const { recordCoords, setRecordCoords } = useContext(MapContext);
 
+  /* MODAL HANDLER */
+  const showModal = () => {
+    setIsUpdateRecordModalOpen(true);
+  };
+
+  /* GET RECORD WHEN REFRESHING */
   const getData = async () => {
     const data = await getRecords();
     setRecords(data);
@@ -42,10 +66,52 @@ const Lists = () => {
     getData();
   }, []);
 
+  /* UPDATE RECORD COORDS */
+  useEffect(() => {
+    const coords = records.map(({ _id, species, hashtag, coords }) => {
+      return {
+        id: _id,
+        species: species,
+        hashtag: hashtag,
+        coordinates: coords.coordinates
+      };
+    });
+    setRecordCoords(coords);
+  }, [records]);
+
   return (
     <div>
       <CustomizedLists
-        header={<ListsHeader />}
+        id="list"
+        header={
+          <div style={{display: "flex", justifyContent: "space-between"}}>
+            <Tooltip title="點擊以選擇顯示分類" >
+              <Select
+                mode="multiple"
+                showArrow={false}
+                tagRender={tagRender}
+                defaultValue={['all']}
+                style={{
+                  width: 'calc( 100% - 100px )',
+                }}
+                options={options}
+              />
+            </Tooltip>
+            <Tooltip title="依照時間排序" >
+              <ActionButton icon={<HiSortDescending />} />
+            </Tooltip>
+            <Tooltip title="回報紀錄" >
+              <Button type="primary" onClick={showModal} style={{width: "64px", height: "30px"}}>
+                <IoAddOutline />
+              </Button>
+            </Tooltip>
+            <UpdateRecordModal 
+              isUpdateRecordModalOpen={isUpdateRecordModalOpen} 
+              setIsUpdateRecordModalOpen={setIsUpdateRecordModalOpen} 
+              setRecords={setRecords}
+            />
+          </div>
+        }
         bordered
         dataSource={records}
         renderItem={(item) => (

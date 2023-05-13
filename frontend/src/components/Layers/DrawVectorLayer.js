@@ -34,7 +34,7 @@ const DrawVectorLayer = ({ name, source, style, zIndex }) => {
 			style
 		});
 		map.addLayer(vectorLayer);
-	}, [userCoord])
+	}, [userCoord]);
 
 	let draw; // global so we can remove it later
 	const addInteraction = () => {

@@ -6,7 +6,7 @@ export const createReocrd = async (req, res) => {
       userId, 
       userName,
       species, 
-      hashtage,
+      hashtag,
       coords,
       placeName,
       post,
@@ -19,7 +19,7 @@ export const createReocrd = async (req, res) => {
       userId,
       userName,
       species,
-      hashtage,
+      hashtag,
       coords: {
         type: 'Point',
         coordinates: coords

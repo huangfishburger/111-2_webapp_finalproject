@@ -31,7 +31,7 @@ const recordSchema = mongoose.Schema(
       min: 2,
       max: 50,
     },
-    hashtage: Number,
+    hashtag: Array,
     post: String,
     speciesImagePath: String,
     authorized: Boolean,
