@@ -43,6 +43,8 @@ const CommentText = styled.div`
 
 const CommentItem = ({ userName, timeStamp, comment, likes, handleClick }) => {
   /* LIKES ICON */
+  const userId = 1; //need to replace!!!
+
   const likes_cnt = likes.length;
   var like_icon;
   if (likes_cnt === 0) {
@@ -77,8 +79,8 @@ const CommentItem = ({ userName, timeStamp, comment, likes, handleClick }) => {
         </div>
         <div className='context'>{comment}</div>
         <Tag
-          className="comment-tag"
-          color={"rgb(238, 238, 238)"}
+          className={"comment-tag"}
+          color={(likes.includes(userId)) ? "#626d4b": "rgb(238, 238, 238)"}
           onClick={handleClick}
         >
           {like_icon}

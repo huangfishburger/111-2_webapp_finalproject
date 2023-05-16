@@ -9,6 +9,7 @@ import { fromLonLat } from "ol/proj";
 const gridStyle = {
   borderTop: "10px solid #f5f5f5",
   borderBottom: "10px solid #f5f5f5",
+  paddingInline: "3.5vw",
 }
 
 const getWindowSize = () => {

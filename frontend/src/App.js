@@ -8,7 +8,6 @@ const { Content } = Layout;
 const contentStyle = {
   minHeight: 450,
   lineHeight: '120px',
-  paddingInline: "3.5vw",
 };
 
 function App() {
