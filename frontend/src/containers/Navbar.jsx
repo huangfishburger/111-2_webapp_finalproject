@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { BsPersonFill } from "react-icons/bs";
 
 const { Header } = Layout;
+const { SubMenu } = Menu;
 
 const CustomizedHeader = styled(Header)`
   position: absolute;
@@ -54,6 +55,13 @@ const navItemsStyle = {
   backdropFilter: "blur(5px)",
   borderRadius: "50%",
 }
+const subitemsStyle = {
+  width: "30px",
+  height: "30px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}
 const buttonStyle = {
   width: "30px",
   height: "30px",
@@ -74,6 +82,8 @@ const menuStyle = {
   paddingInline: "10px",
 }
 
+
+
 const navLabelItems = {
   "": "主畫面",
   "educate": "教育",
@@ -82,10 +92,44 @@ const navLabelItems = {
   "foundation": "贊助我們",
 }
 
-const navItems = ['', 'educate', 'record', 'contact', 'foundation'].map((key) => ({
-  key,
-  label: <Link to={"/"+key}>{navLabelItems[key]}</Link>,
-}));
+const educate = [
+  {
+    label: (
+      <div>
+        <Link to={"/game"}>青蛙知識王</Link>
+      </div>
+    ),
+    key: '2',
+  },
+  {
+    label: (
+      <div>
+        <Link to={"/search"}>青蛙小百科</Link>
+      </div>
+    ),
+    key: '3',
+  }
+];
+
+const navItems = ['', 'educate', 'record', 'contact', 'foundation'].map((key) => {
+  if (key === 'educate') {
+    return {
+      key,
+      label: (
+        <SubMenu key={key} title={navLabelItems[key]} style={subitemsStyle}>
+          {educate.map(item => (
+            <Menu.Item key={item.key} >{item.label}</Menu.Item>
+          ))}
+        </SubMenu>
+      ),
+    };
+  }
+  return {
+    key,
+    label: <Link to={"/"+key}>{navLabelItems[key]}</Link>,
+  };
+});
+
 
 const loginItems = [
   {

@@ -1,12 +1,14 @@
 import { IndexPage } from "./Index/IndexPage";
-import { EducatePage } from "./Educate/EducatePage";
+import { Game } from "./Educate/Game";
+import { Search } from "./Educate/Search";
 import { RecordPage } from "./Record/RecordPage";
 import { ContactPage } from "./Contact/ContactPage";
 import { FoundationPage } from "./Foundation/FoundationPage";
 
 export {
   IndexPage,
-  EducatePage,
+  Game,
+  Search,
   RecordPage,
   ContactPage,
   FoundationPage
