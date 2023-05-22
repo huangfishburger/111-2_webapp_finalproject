@@ -2,7 +2,7 @@ import { Select , Tooltip} from 'antd';
 
 const CustomSelect = ({ defaultValue, options}) => {
   return (
-    <Tooltip title="點擊以選擇顯示分類" >
+    <Tooltip title="點擊以選擇" >
     <Select
       mode="single"
       showArrow={true}

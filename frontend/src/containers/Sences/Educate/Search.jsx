@@ -145,9 +145,9 @@ const optionsfrog =
 
 const Search = (props) => {
   return (
-    <div style={{ ...props.contentStyle }}>
+    <div style={{ ...props.contentStyle}}>
         <h4 style={{paddingLeft: '10vh',paddingTop: '3vh',marginBottom: '-10vh'}}>依標籤查詢</h4>
-        <Divider style={{ margin: '15px 0'}} />
+        <Divider style={{ margin: '5vh 0'}} />
         <div style={{display: "flex", justifyContent: "space-between" ,paddingLeft: '12vh' ,paddingRight: '12vh'}}>
             <CustomSelect
                 defaultValue="背部顏色"
@@ -173,7 +173,7 @@ const Search = (props) => {
         </div>
 
         <h4 style={{paddingLeft: '10vh',paddingTop: '3vh',marginBottom: '-10vh'}}>依名稱與物種查詢</h4>
-        <Divider style={{ margin: '15px 0'}} />
+        <Divider style={{ margin: '5vh'}} />
         <div style={{display: "flex", justifyContent: "space-between" ,paddingLeft: '12vh' ,paddingRight: '12vh'}}>
             <CustomSelect
                 defaultValue="物種"
@@ -192,8 +192,8 @@ const Search = (props) => {
             </Tooltip>
         </div>
 
-        <h4 style={{paddingLeft: '10vh',paddingTop: '3vh',marginBottom: '-10vh'}}>依照片查詢</h4>
-        <Divider style={{ margin: '15px 0'}} />
+        <h4 style={{paddingLeft: '10vh',paddingTop: '3vh',marginBottom: '-10vh'}}>依圖片查詢</h4>
+        <Divider style={{ margin: '5vh 0'}} />
         <div style={{display: "flex", justifyContent: "space-between" ,paddingLeft: '12vh' ,paddingRight: '12vh'}}>
             <ImageUpload />
             <Tooltip title="搜尋" >
@@ -202,6 +202,7 @@ const Search = (props) => {
               </Button>
             </Tooltip>
         </div>    
+        
     </div>
   );
 };
