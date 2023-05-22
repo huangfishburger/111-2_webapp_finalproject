@@ -2,7 +2,7 @@ import './App.css';
 import { Layout } from 'antd';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navbar } from './containers/Navbar';
-import { IndexPage, EducatePage, Game, Search, RecordPage, ContactPage, FoundationPage } from './containers/Sences';
+import { IndexPage, Problem, Game, Search, RecordPage, ContactPage, FoundationPage } from './containers/Sences';
 
 const { Content } = Layout;
 const contentStyle = {
@@ -24,7 +24,8 @@ function App() {
           <Content style={contentStyle}>
             <Routes>
               <Route path="/" element={ <IndexPage /> } />
-              <Route path="/game" element={ <Game /> } />
+              <Route path="/game" element={ <Game contentStyle={searchContentStyle}/> } />
+              <Route path="/problem" element={ <Problem /> } />
               <Route path="/search"  element={<Search contentStyle={searchContentStyle}/>} />
               <Route path="/record" element={ <RecordPage /> } />
               <Route path="/contact" element={ <ContactPage /> } />

@@ -4,7 +4,7 @@ import styled from "styled-components";
 const MyCard = styled(Card)`
   width: 100%;
   height: 50vh;
-  font-size: xx-small; 
+  font-size: 20px; 
   border-color: #D9D9D9;
   color: rgb(102, 102, 102);
   &:hover{
@@ -39,8 +39,10 @@ const ProblemCard = ({ className, onClick, photo, text }) => {
         }}
       >
       </div>
-      <img src={photo} alt="frog" style={{ width: "60%", height: "60%" }}/>
-      <div>{text}</div>
+      <div style={{ width: "50%", position: "relative", paddingBottom: "50%" }}>
+        <img src={photo} alt="frog" style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover" }} />
+      </div>
+      <div><br />{text}</div>
     </MyCard>
   );
 };
