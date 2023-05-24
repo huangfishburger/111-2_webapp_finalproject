@@ -1,6 +1,6 @@
 import { OptionCard } from 'components/OptionCard';
 import styled from 'styled-components';
-import { Divider, Button, Tooltip} from 'antd';
+import { Divider, Button, Tooltip,  message} from 'antd';
 import { useState } from 'react';
 import { BsStar, BsStarHalf, BsStarFill} from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,6 @@ const OptionCardRow = styled.div`
   height: 50vh;
 `;
 
-
 const Game = (props) => {
     const [ hashtagTypes, setHashtagTypes ] = useState([]);
     const navigate = useNavigate();
@@ -27,7 +26,13 @@ const Game = (props) => {
           }
     };
     const onClick = () => {
-        navigate('/problem');
+        if (hashtagTypes.length === 0) {
+            message.error("請選擇遊戲難度");
+        }
+        else{
+            navigate('/problem');
+        }
+            
     };
     return (
         <div style={{ ...props.contentStyle}}>
