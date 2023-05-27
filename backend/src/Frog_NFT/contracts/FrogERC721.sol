@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/token/ERC721/extensions/ERC721Enumerable.sol";
-import "@openzeppelin/access/Ownable.sol";
-import "@openzeppelin/utils/Strings.sol";
+import "node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "node_modules/@openzeppelin/contracts/utils/Strings.sol";
 
 // deploy to 0x35E108AF62bD185793E4a05c110b36ED1C038280
 contract FrogNFT is ERC721Enumerable, Ownable {
