@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { Button, Space, InputNumber } from 'antd';
 import { PlusOutlined, MinusOutlined, HeartTwoTone } from '@ant-design/icons';
 import { Web3Button } from "@thirdweb-dev/react";
+import { ethers } from "ethers";
+
+
 
 const NFTMintButton = () => {
     const [mintCount, setMintCount] = useState(1);
@@ -33,12 +36,17 @@ const NFTMintButton = () => {
             <Space wrap>
                 <Web3Button
                     className="nft-mint-button"
-                    contractAddress="0x35E108AF62bD185793E4a05c110b36ED1C038280"
+                    contractAddress="0x594890f2fE1CbD220756f3a7f98406365858058d"
                     action={async (contract) => {
-                        await contract.erc721.mint(mintCount);
+                        console.log("mintCount: ", mintCount)
+                        console.log("typeof mintCount: ", typeof mintCount)
+                        await contract.call("mint", [mintCount], { value: ethers.utils.parseEther("0.005").mul(mintCount) });
                     }}
                     onSuccess={(result) => alert("Mint NFT Success!")}
-                    onError={(error) => alert("Something went wrong!")}
+                    onError={(error) => {
+                        alert("Something went wrong!")
+                        console.log(error)
+                    }}
                     onSubmit={() => console.log("Transaction submitted")}
                 >
                     Mint NFT!

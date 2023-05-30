@@ -3,6 +3,8 @@ import { Layout } from 'antd';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navbar } from './containers/Navbar';
 import { IndexPage, Problem, Game, Search, RecordPage, ContactPage, FoundationPage } from './containers/Sences';
+import { ThirdwebProvider } from "@thirdweb-dev/react";
+import { metamaskWallet } from "@thirdweb-dev/react";
 
 const { Content } = Layout;
 const contentStyle = {
@@ -16,25 +18,28 @@ const searchContentStyle = {
 };
 
 function App() {
+  const metamaskConfig = metamaskWallet();
   return (
-    <div className="App">
-      <Layout>
-        <BrowserRouter>
-          <Navbar />
-          <Content style={contentStyle}>
-            <Routes>
-              <Route path="/" element={ <IndexPage /> } />
-              <Route path="/game" element={ <Game contentStyle={searchContentStyle}/> } />
-              <Route path="/problem" element={ <Problem /> } />
-              <Route path="/search"  element={<Search contentStyle={searchContentStyle}/>} />
-              <Route path="/record" element={ <RecordPage /> } />
-              <Route path="/contact" element={ <ContactPage /> } />
-              <Route path="/foundation" element={ <FoundationPage /> } />
-            </Routes>
-          </Content>
-        </BrowserRouter>
-      </Layout>
-    </div>
+    <ThirdwebProvider activeChain={"goerli"} supportedWallets={[metamaskWallet()]}>
+      <div className="App">
+        <Layout>
+          <BrowserRouter>
+            <Navbar />
+            <Content style={contentStyle}>
+              <Routes>
+                <Route path="/" element={<IndexPage />} />
+                <Route path="/game" element={<Game contentStyle={searchContentStyle} />} />
+                <Route path="/problem" element={<Problem />} />
+                <Route path="/search" element={<Search contentStyle={searchContentStyle} />} />
+                <Route path="/record" element={<RecordPage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="/foundation" element={<FoundationPage />} />
+              </Routes>
+            </Content>
+          </BrowserRouter>
+        </Layout>
+      </div>
+    </ThirdwebProvider>
   );
 }
 
