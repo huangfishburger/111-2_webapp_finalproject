@@ -3,7 +3,8 @@ import NFTGallery from "components/NFTGallery";
 
 const FoundationPage = () => {
   return (
-    <div>贊助我們
+    <div>
+      <h1 style={{ display: "flex", justifyContent: "center", alignItems: "flex-end", marginBottom: "-2vh"}}>Frogather Blind Box</h1>
       <NFTGallery />
       <NFTMintButton />
     </div>
