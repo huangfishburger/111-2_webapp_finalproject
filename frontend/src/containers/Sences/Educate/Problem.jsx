@@ -1,6 +1,6 @@
 import { ProblemCard } from 'components/ProblemCard';
 import styled from 'styled-components';
-import {  Button, Tooltip} from 'antd';
+import {  Button, Tooltip, message} from 'antd';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
@@ -36,9 +36,12 @@ const Problem = () => {
     };
     
     const submitClick = () => {
-      if (!isButtonClicked) {
+      if (!isButtonClicked && hashtagTypes.length === 1) {
         setFlipped(false);
         setIsButtonClicked(true);
+      }
+      else if (hashtagTypes.length === 0) {
+            message.error("請選擇一個答案");
       }
     };
       
@@ -51,24 +54,27 @@ const Problem = () => {
                 onClick={() => handleHashtage(1)}
                 photo={require("./frog.jpg")}
                 problemtext={"青蛙"}
-                answertext={"我是外來種"}
+                answertext={"我是外來種我是外來種我是外來種我是外來種我是外來種"}
                 flipped={flipped}
+                ans={true}
                 />
                 <ProblemCard
                 className={(hashtagTypes.includes(2))? "active": ""}
                 onClick={() => handleHashtage(2)}
                 photo={require("./frog1.png")}
                 problemtext={"樹蛙"}
-                answertext={"我是本土種"}
+                answertext={"我是本土種我是本土種我是本土種我是本土種我是本土種"}
                 flipped={flipped}
+                ans={false}
                 />
                 <ProblemCard
                 className={(hashtagTypes.includes(3))? "active": ""}
                 onClick={() => handleHashtage(3)}
                 photo={require("./frog2.jpg")}
                 problemtext={"蟾蜍"}
-                answertext={"我不知道我"}
+                answertext={"我不知道我是誰我不知道我是誰我不知道我是誰我不知道我是誰我不知道我是誰"}
                 flipped={flipped}
+                ans={false}
                 />
             </ProblemCardRow>
 

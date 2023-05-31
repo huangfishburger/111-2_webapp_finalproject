@@ -29,7 +29,7 @@ const MyCard = styled(Card)`
 `;
 
 
-const ProblemCard = ({ className, onClick, photo, problemtext, answertext, flipped}) => {
+const ProblemCard = ({ className, onClick, photo, problemtext, answertext, ans, flipped}) => {
   return (
       <MyCard
           className={`${className} card ${flipped ? 'flipped' : ''}`}
@@ -43,7 +43,7 @@ const ProblemCard = ({ className, onClick, photo, problemtext, answertext, flipp
                       style={{ width: "50%", height: "60%", objectFit: "cover"}} />
                   <br />{problemtext}
               </div>
-              <div className="back" style={{fontSize: "5px"}}>
+              <div className={`back ${ans ? 'ans' : 'nans'}`} style={{fontSize: "15px", marginTop: "-5%"}}>
                   {answertext}
               </div>
           </div>
