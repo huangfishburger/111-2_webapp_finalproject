@@ -80,6 +80,7 @@ db link: https://www.mongodb.com/
  ┃ ┗ 📜recordComments.js  
  ┣ 📂data => local data  
  ┃ ┗ 📜index.js  
+ ┣ 📂Frog_NFT => 青蛙NFT的code和圖片（deploy 到 Sepolia 測試鏈，地址 0x35E108AF62bD185793E4a05c110b36ED1C038280）    
  ┣ 📂models => 建立DB Schema 📌  
  ┃ ┣ 📜Record.js  
  ┃ ┣ 📜RecordComments.js  

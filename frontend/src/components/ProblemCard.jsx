@@ -1,5 +1,6 @@
 import { Card } from "antd";
 import styled from "styled-components";
+import './cardstyle.css';
 
 const MyCard = styled(Card)`
   width: 100%;
@@ -24,27 +25,33 @@ const MyCard = styled(Card)`
     font-size: x-large;
     height: 40px;
   }
+  
 `;
 
-const ProblemCard = ({ className, onClick, photo, text }) => {
+
+const ProblemCard = ({ className, onClick, photo, problemtext, answertext, ans, flipped}) => {
   return (
-    <MyCard
-      className={className}
-      onClick={onClick}
-      
-    >
-      <div 
-        style={{
-          fontSize: "1rem",
-        }}
+      <MyCard
+          className={`${className} card ${flipped ? 'flipped' : ''}`}
+          onClick={onClick}
       >
-      </div>
-      <div style={{ width: "50%", position: "relative", paddingBottom: "50%" }}>
-        <img src={photo} alt="frog" style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover" }} />
-      </div>
-      <div><br />{text}</div>
-    </MyCard>
-  );
-};
+          <div className={`card ${flipped ? 'front' : 'back'}`}>
+              <div className="front">
+                  <img
+                      src={photo}
+                      alt="frog"
+                      style={{ width: "50%", height: "60%", objectFit: "cover"}} />
+                  <br />{problemtext}
+              </div>
+              <div className={`back ${ans ? 'ans' : 'nans'}`} style={{fontSize: "15px", marginTop: "-5%"}}>
+                  {answertext}
+              </div>
+          </div>
+      </MyCard>
+      );
+    };
 
 export { ProblemCard }
+
+
+

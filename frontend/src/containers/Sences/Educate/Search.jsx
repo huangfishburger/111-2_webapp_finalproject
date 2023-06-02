@@ -1,5 +1,4 @@
-import { Divider } from 'antd';
-import { Button, Tooltip, Input} from 'antd';
+import { Divider, Button, Tooltip, Input} from 'antd';
 import { CustomSelect } from '../../../components/CustomSelect';
 import Frog from "assets/frogoption.json";
 import { ImageUpload } from 'components/ImageUpload';
