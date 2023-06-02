@@ -11,7 +11,7 @@ export const getReverseGeocoding = async (lat, lon) => {
     }
   );
   const place_name = location["display_name"];
-  const place_name_list = place_name.split(", ");
+  const place_name_list = place_name?.split(", ");
   //console.log(place_name_list);
   return place_name_list
 } 

@@ -32,7 +32,7 @@ const ViewButton = styled(Button)`
 `;
 
 const MapContainer = ({mapView, setMapView}) => {
-  const { map, userCoord, recordCoords } = useContext(MapContext);
+  const { userCoord, recordCoords } = useContext(MapContext);
   const [ isShowRecordVectorLayer, setIsShowRecordVectorLayer ] = useState(true);
 
   const handleViewButtonClick = () => {

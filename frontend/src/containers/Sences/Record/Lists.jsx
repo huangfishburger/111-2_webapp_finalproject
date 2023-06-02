@@ -49,7 +49,7 @@ const options = [
 const Lists = () => {
   const [ records, setRecords ] = useState([]);
   const [ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen ] = useState(false);
-  const { recordCoords, setRecordCoords } = useContext(MapContext);
+  const { setRecordCoords } = useContext(MapContext);
 
   /* MODAL HANDLER */
   const showModal = () => {

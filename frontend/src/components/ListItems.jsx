@@ -100,7 +100,7 @@ const ListItems = ({ item }) => {
                 <div style={listItemsTextStyle}>
                   <div style={nameTextStyle}>
                     {item.species}
-                    {item.hashtag.map((hashtag) => {
+                    {item.hashtag?.map((hashtag) => {
                       return (<StatusTag status={hashtag}/>)
                     })}
                   </div>

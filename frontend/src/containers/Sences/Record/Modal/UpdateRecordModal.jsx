@@ -26,7 +26,7 @@ const speciesDataSource =
     }
   });
 const spotDataSource =
-  Spot["XML_Head"]["Infos"]["Info"].map((item, index)=>{
+  Spot["XML_Head"]["Infos"]["Info"]?.map((item, index)=>{
     var lat_and_lon = Math.round(item.Py*100)/100 + ", " + Math.round(item.Px*100)/100;
     return {
       "key": index,
@@ -67,28 +67,32 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
   const [ form ] = Form.useForm();
 
   useEffect(() => {
-    var lat_and_lon = toLonLat(userCoord);
-    const fetchData = async () => {
-      const result = await getReverseGeocoding(lat_and_lon[1], lat_and_lon[0]);
-      setUserPlaceName(result)
+    if (userCoord) {
+      var lat_and_lon = toLonLat(userCoord);
+      const fetchData = async () => {
+        const result = await getReverseGeocoding(lat_and_lon[1], lat_and_lon[0]);
+        setUserPlaceName(result)
+      }
+      fetchData();
+      form.setFieldValue("placeCoord", lat_and_lon);
     }
-    fetchData();
-    form.setFieldValue("placeCoord", lat_and_lon);
 	}, [userCoord]);
 
 
   useEffect(() => {
-    var lat_and_lon = toLonLat(userCoord);
-    lat_and_lon = Math.round(lat_and_lon[0]*100)/100 + ", " + Math.round(lat_and_lon[1]*100)/100;
-    const options = userPlaceName.map((place, index)=>{
-      return {
-        "key": index,
-        "value": place,
-        "label": <>{place}<span style={coordTextStyle}>{lat_and_lon}</span></>
+    if (userPlaceName) {
+      var lat_and_lon = toLonLat(userCoord);
+      lat_and_lon = Math.round(lat_and_lon[0]*100)/100 + ", " + Math.round(lat_and_lon[1]*100)/100;
+      const options = userPlaceName.map((place, index)=>{
+        return {
+          "key": index,
+          "value": place,
+          "label": <>{place}<span style={coordTextStyle}>{lat_and_lon}</span></>
+        }
+      });
+      if (options.length > 0) {
+        setLocationOptions([options[0], options[1], options[2]]); 
       }
-    });
-    if (options.length > 0) {
-      setLocationOptions([options[0], options[1], options[2]]); 
     }
   }, [userPlaceName]);
 

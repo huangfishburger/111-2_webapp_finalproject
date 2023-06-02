@@ -62,15 +62,6 @@ const subitemsStyle = {
   alignItems: "center",
   justifyContent: "center",
 }
-const buttonStyle = {
-  width: "30px",
-  height: "30px",
-  borderRadius: "50%",
-  color: "#161616",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}
 const menuStyle = {
   height: "30px",
   width: "100%",
