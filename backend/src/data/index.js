@@ -1,5 +1,62 @@
 import mongoose from "mongoose";
 
+export const frogs = [
+  {
+    _id: new mongoose.Types.ObjectId(),
+    name: "海蟾蜍",
+    backColor: ["黃褐色", "灰褐色", "褐色"],
+    location: ["草叢", "樹林", "開墾地"],
+    patternType: "斑點",
+    category: "外來種",
+    species: "蟾蜍",
+  },
+  {
+    _id: new mongoose.Types.ObjectId(),
+    name: "亞洲錦蛙",
+    backColor: ["黃褐色", "褐色"],
+    location: ["草叢", "果園", "開墾地", "水溝沼澤"],
+    patternType: "無花紋",
+    category: "外來種",
+    species: "錦蛙",
+  },
+  {
+    _id: new mongoose.Types.ObjectId(),
+    name: "美洲牛蛙",
+    backColor: ["綠褐色", "褐色"],
+    location: ["水溝沼澤", "靜水域"],
+    patternType: "條紋",
+    category: "外來種",
+    species: "牛蛙",
+  },
+  {
+    _id: new mongoose.Types.ObjectId(),
+    name: "斑腿樹蛙",
+    backColor: ["褐色"],
+    location: ["草叢", "開墾地"],
+    patternType: "斑點",
+    category: "外來種",
+    species: "樹蛙",
+  },
+  {
+    _id: new mongoose.Types.ObjectId(),
+    name: "巴氏小雨蛙",
+    backColor: ["褐色", "灰褐色"],
+    location: ["草叢", "水溝沼澤"],
+    patternType: "斑點",
+    category: "本土種",
+    species: "小雨蛙",
+  },
+  {
+    _id: new mongoose.Types.ObjectId(),
+    name: "台北樹蛙",
+    backColor: ["褐色", "綠色", "綠褐色"],
+    location: ["果園", "樹林", "開墾地", "靜水域"],
+    patternType: "斑點",
+    category: "本土種",
+    species: "樹蛙",
+  }
+];
+
 const userIds = [
   new mongoose.Types.ObjectId(),
   new mongoose.Types.ObjectId(),

@@ -5,7 +5,8 @@ import dotenv from 'dotenv-defaults'
 import db from "./db";
 import routes from './routes';
 import Record from './models/Record';
-import { records } from "./data/index.js";
+import FrogDB from './models/FrogDB';
+import { records, frogs } from "./data/index.js";
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -31,4 +32,5 @@ const PORT = process.env.PORT || 4000;
 db.connect();
 /* ADD DATA ONE TIME */
 //Record.insertMany(records);
+FrogDB.insertMany(frogs);
 app.listen(PORT, () => {console.log(`Server is up on port ${PORT}.`)});
