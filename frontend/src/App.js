@@ -15,6 +15,7 @@ const contentStyle = {
 const searchContentStyle = {
   ...contentStyle,
   minHeight: 'calc(100vh)',
+  paddingInline: "5vh",
 };
 
 function App() {

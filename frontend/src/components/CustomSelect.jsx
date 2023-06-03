@@ -1,19 +1,15 @@
 import { Select , Tooltip} from 'antd';
 
-const CustomSelect = ({ defaultValue, options}) => {
+const CustomSelect = ({ defaultValue, options, onChange }) => {
   return (
     <Tooltip title="點擊以選擇" >
-    <Select
-      mode="single"
-      showArrow={true}
-      defaultValue={defaultValue}
-      style={{
-        width: 'calc(100% - 200px)',
-        flex: 1,
-        marginRight: '20px',
-      }}
-      options={options}
-    />
+      <Select
+        mode="single"
+        showArrow={true}
+        defaultValue={defaultValue}
+        options={options}
+        onChange={onChange}
+      />
     </Tooltip>
   );
 };

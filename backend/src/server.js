@@ -31,6 +31,6 @@ app.use('/', routes);
 const PORT = process.env.PORT || 4000;
 db.connect();
 /* ADD DATA ONE TIME */
-//Record.insertMany(records);
-FrogDB.insertMany(frogs);
+// Record.insertMany(records);
+// FrogDB.insertMany(frogs);
 app.listen(PORT, () => {console.log(`Server is up on port ${PORT}.`)});
