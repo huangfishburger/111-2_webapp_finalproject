@@ -2,13 +2,13 @@ import './App.css';
 import { Layout } from 'antd';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navbar } from './containers/Navbar';
-import { IndexPage, Problem, Game, Search, RecordPage, ContactPage, FoundationPage } from './containers/Sences';
+import { IndexPage, Problem, Game, Search, Result, RecordPage, ContactPage, FoundationPage } from './containers/Sences';
 import { ThirdwebProvider } from "@thirdweb-dev/react";
 import { metamaskWallet } from "@thirdweb-dev/react";
 
 const { Content } = Layout;
 const contentStyle = {
-  minHeight: 450,
+  minHeight: '100vh',
   lineHeight: '120px',
 }
 
@@ -29,9 +29,10 @@ function App() {
             <Content style={contentStyle}>
               <Routes>
                 <Route path="/" element={<IndexPage />} />
-                <Route path="/game" element={<Game contentStyle={searchContentStyle} />} />
+                <Route path="/game" element={<Game />} />
                 <Route path="/problem" element={<Problem />} />
-                <Route path="/search" element={<Search contentStyle={searchContentStyle} />} />
+                <Route path="/search" element={<Search />} />
+                <Route path="/result" element={<Result />} />
                 <Route path="/record" element={<RecordPage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/foundation" element={<FoundationPage />} />

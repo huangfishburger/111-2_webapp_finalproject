@@ -78,7 +78,7 @@ const Problem = () => {
                 />
             </ProblemCardRow>
 
-            <div style={{ display: "flex", justifyContent: "space-between" , marginBottom: '10vh' , padding: '0 80vh'}}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", padding: "0 50vh"}}>
                 <Tooltip title="點擊提交答案" >
                     <Button type="primary"  onClick={submitClick} style={{width: "64px", height: "30px"}}>
                         提交

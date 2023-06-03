@@ -33,4 +33,7 @@ db.connect();
 /* ADD DATA ONE TIME */
 // Record.insertMany(records);
 // FrogDB.insertMany(frogs);
+
+console.log("Server is listening on port 4000");
+
 app.listen(PORT, () => {console.log(`Server is up on port ${PORT}.`)});

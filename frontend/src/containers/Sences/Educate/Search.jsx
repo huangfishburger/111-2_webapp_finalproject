@@ -5,6 +5,7 @@ import Frog from "assets/frogoption.json";
 import { ImageUpload } from 'components/ImageUpload';
 import styled from 'styled-components';
 import { getFrog } from './../../../axios/getFrog';
+import { useNavigate } from "react-router-dom";
 
 const InlineDiv = styled.div`
   width: calc(100% - 64px);
@@ -47,6 +48,11 @@ const optionsback = [
     value: "黃綠色",
   },
   {
+    key: '23',
+    label: '綠色',
+    value: "綠色",
+  },
+  {
     key: '7',
     label: '其他',
     value: "其他",
@@ -83,6 +89,11 @@ const optionsloc = [
       key: '13',
       label: '水溝沼澤',
       value: "水溝沼澤",
+    },
+    {
+      key: '24',
+      label: '靜水域',
+      value: "靜水域",
     },
     {
       key: '14',
@@ -156,13 +167,18 @@ const Search = (props) => {
   const formRef = React.useRef(null);
   const [ labelFrogs, setLabelFrogs] = useState([])
   const [ speciesAndNameFrogs, setSpeciesAndNameFrogsFrogs ] = useState([]);
-
+  const navigate = useNavigate();
   /* FORM SUMBIT */
   const onLabelFinish = async (values) => {
     message.success("💪🐸：查詢成功");
     const data = await getFrog(values);
     console.log(data);
+    const queryParams = new URLSearchParams();
+    data.forEach((item, index) => {
+      queryParams.append(`name${index + 1}`, item.name);
+    });
     setLabelFrogs(data);
+    navigate(`/result?${queryParams}`);
   };
   
   const onSpeciesAndNameFinish = async (values) => {
@@ -170,7 +186,12 @@ const Search = (props) => {
     message.success("💪🐸：查詢成功");
     const data = await getFrog(values);
     console.log(data);
+    const queryParams = new URLSearchParams();
+    data.forEach((item, index) => {
+      queryParams.append(`name${index + 1}`, item.name);
+    });
     setSpeciesAndNameFrogsFrogs(data);
+    navigate(`/result?${queryParams}`);
   };
 
   /* SELECT CHANGE */
@@ -192,6 +213,9 @@ const Search = (props) => {
 
   const onSpeciesChange = (value) => {
     formRef.current?.setFieldValue("species", value);
+  };
+  const onClick = () => {
+    window.open('https://images.google.com/', '_blank');
   };
 
   return (
@@ -253,7 +277,6 @@ const Search = (props) => {
             </Form.Item>
           </div>
         </Form>
-
         <h4 style={{paddingLeft: '10vh',paddingTop: '3vh',marginBottom: '-10vh'}}>依名稱與物種查詢</h4>
         <Divider />
         <Form
@@ -300,7 +323,7 @@ const Search = (props) => {
         <div style={{display: "flex", justifyContent: "space-between" ,paddingLeft: '12vh' ,paddingRight: '12vh', alignItems: "center"}}>
             <ImageUpload />
             <Tooltip title="搜尋" >
-              <Button type="primary" style={{width: "64px", height: "30px"}}>
+              <Button type="primary" onClick={onClick} style={{width: "64px", height: "30px"}}>
                 搜尋
               </Button>
             </Tooltip>
