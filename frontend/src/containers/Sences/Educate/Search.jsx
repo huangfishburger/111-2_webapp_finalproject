@@ -155,13 +155,22 @@ const optionsfrog =
 const Search = (props) => {
   const formRef = React.useRef(null);
   const [ labelFrogs, setLabelFrogs] = useState([])
+  const [ speciesAndNameFrogs, setSpeciesAndNameFrogsFrogs ] = useState([]);
 
   /* FORM SUMBIT */
-  const onFinish = async (values) => {
+  const onLabelFinish = async (values) => {
     message.success("💪🐸：查詢成功");
     const data = await getFrog(values);
     console.log(data);
     setLabelFrogs(data);
+  };
+  
+  const onSpeciesAndNameFinish = async (values) => {
+    console.log(values);
+    message.success("💪🐸：查詢成功");
+    const data = await getFrog(values);
+    console.log(data);
+    setSpeciesAndNameFrogsFrogs(data);
   };
 
   /* SELECT CHANGE */
@@ -177,6 +186,10 @@ const Search = (props) => {
     formRef.current?.setFieldValue("location", value);
   };
 
+  const onCategoryChange = (value) => {
+    formRef.current?.setFieldValue("category", value);
+  };
+
   const onSpeciesChange = (value) => {
     formRef.current?.setFieldValue("species", value);
   };
@@ -187,8 +200,8 @@ const Search = (props) => {
         <Divider/>
         <Form
           ref={formRef}
-          name="searchFrog"
-          onFinish={onFinish}
+          name="searchLabelFrog"
+          onFinish={onLabelFinish}
           autoComplete="off"
           style={{paddingInline: '12vh'}}
         >
@@ -222,12 +235,12 @@ const Search = (props) => {
                 />
               </Form.Item>
               <Form.Item
-                name="species"
+                name="category"
               >
                 <CustomSelect
                   defaultValue="種類"
                   options={optionstype}
-                  onChange={onSpeciesChange}
+                  onChange={onCategoryChange}
                 />
               </Form.Item>
             </InlineDiv>
@@ -243,23 +256,44 @@ const Search = (props) => {
 
         <h4 style={{paddingLeft: '10vh',paddingTop: '3vh',marginBottom: '-10vh'}}>依名稱與物種查詢</h4>
         <Divider />
-        <div style={{display: "flex", justifyContent: "space-between", paddingInline: '12vh', alignItems: "center"}}>
-            <CustomSelect
-                defaultValue="物種"
-                options={optionsfrog}
-            />
-            <Tooltip title="填寫青蛙名稱" >
-            <Input
-                placeholder="例如:莫氏樹蛙"
-                style={{ flex: 1, marginRight: '20px', border: 'none'}}
-            />
-            </Tooltip>
-            <Tooltip title="搜尋" >
-              <Button type="primary" style={{width: "64px", height: "30px"}}>
-                搜尋
-              </Button>
-            </Tooltip>
-        </div>
+        <Form
+          ref={formRef}
+          name="searchSpeciesAndNameFrog"
+          onFinish={onSpeciesAndNameFinish}
+          autoComplete="off"
+          style={{paddingInline: '12vh'}}
+        >
+          <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+            <InlineDiv>
+              <Form.Item
+                name="species"
+              >
+                <CustomSelect
+                    defaultValue="物種"
+                    options={optionsfrog}
+                    onChange={onSpeciesChange}
+                />
+              </Form.Item>
+              <Tooltip title="填寫青蛙名稱" >
+                <Form.Item
+                  name="name"
+                >
+                  <Input
+                    placeholder="例如:莫氏樹蛙"
+                    style={{ flex: 1, marginRight: '20px', border: 'none'}}
+                  />
+                </Form.Item>
+              </Tooltip>
+            </InlineDiv>
+            <Form.Item>
+              <Tooltip title="搜尋" >
+                <Button type="primary" htmlType="submit" style={{width: "64px", height: "30px"}}>
+                  搜尋
+                </Button>
+              </Tooltip>
+            </Form.Item>
+          </div>
+        </Form>
 
         <h4 style={{paddingLeft: '10vh',paddingTop: '3vh',marginBottom: '-10vh'}}>依圖片查詢</h4>
         <Divider />

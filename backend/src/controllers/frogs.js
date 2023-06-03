@@ -7,6 +7,8 @@ export const getFrogs = async (req, res) => {
       location,
       patternType,
       category,
+      species,
+      name,
     } = req.query;
 
     var query = {}
@@ -14,6 +16,8 @@ export const getFrogs = async (req, res) => {
     if (location !== "不特定" && location !== undefined ) query["location"] = { $in: location };
     if (patternType !== "不特定" && patternType !== undefined ) query["patternType"] = { $eq: patternType };
     if (category !== "不特定" && category !== undefined ) query["category"] = { $eq: category };
+    if (species !== "不特定" && species !== undefined ) query["species"] = { $eq: species };
+    if (name !== undefined ) query["name"] = { $regex: name };
 
     console.log(query);
     const frogs = await FrogDB.find(query); 
