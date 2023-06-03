@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 import { Layout, Menu, Button, Dropdown } from 'antd';
 import styled from 'styled-components';
 import { BsPersonFill } from "react-icons/bs";
-
+import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from 'components/LoginButton';
+import LogoutButton from 'components/LogoutButton';
 const { Header } = Layout;
 const { SubMenu } = Menu;
 
@@ -125,20 +127,15 @@ const navItems = ['', 'educate', 'record', 'contact', 'foundation'].map((key) =>
 const loginItems = [
   {
     label: (
-      <div>
-        登入
-      </div>
+      
+      <> 
+        <LoginButton />
+        <LogoutButton />
+      </>
     ),
     key: '0',
   },
-  {
-    label: (
-      <div>
-        註冊
-      </div>
-    ),
-    key: '1',
-  }
+ 
 ];
   
 
