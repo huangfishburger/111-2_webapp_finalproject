@@ -27,7 +27,7 @@ const NFTMintButton = () => {
     };
     const NFTMintButtonStyle = {
         display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
     }
 
     return (
@@ -48,6 +48,7 @@ const NFTMintButton = () => {
                         console.log(error)
                     }}
                     onSubmit={() => console.log("Transaction submitted")}
+                    style={{ backgroundColor: '#DDE1A0', borderColor: '#DDE1A0', fontFamily: 'Comic Sans MS' }}
                 >
                     Mint NFT!
                 </Web3Button>
