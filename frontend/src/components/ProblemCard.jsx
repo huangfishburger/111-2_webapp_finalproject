@@ -43,7 +43,7 @@ const ProblemCard = ({ className, onClick, photo, problemtext, answertext, ans, 
                       style={{ width: "50%", height: "60%", objectFit: "cover"}} />
                   <br />{problemtext}
               </div>
-              <div className={`back ${ans ? 'ans' : 'nans'}`} style={{fontSize: "2.5vh", marginTop: "-5%"}}>
+              <div className={`back ${ans ? 'ans' : 'nans'}`} style={{fontSize: "17px", marginTop: "-5%"}}>
                   {answertext}
               </div>
           </div>
