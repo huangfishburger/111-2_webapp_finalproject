@@ -5,6 +5,7 @@ export const createRecordComment = async (req, res) => {
     const { 
       postId,
       userName,
+      userImg,
       comment,
     } = req.body;
 
@@ -12,6 +13,7 @@ export const createRecordComment = async (req, res) => {
     const newRecordComment = new RecordComments({
       postId,
       userName,
+      userImg,
       comment,
       likes: [],
     });

@@ -40,9 +40,10 @@ export const createReocrd = async (req, res) => {
   }
 }
 
-export const getRecords = async (_, res) => {
+export const getRecords = async (req, res) => {
   try {
-    const record = await Record.find({ authorized: { $eq: true } }); 
+    const { isAsc } = req.query;
+    const record = await Record.find({ authorized: { $eq: true } }).sort({ _id: isAsc }); 
     res.status(200).json(record);
   } catch (err) {
     res.status(404).json({ message: err.message });

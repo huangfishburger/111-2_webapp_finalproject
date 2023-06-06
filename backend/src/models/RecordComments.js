@@ -14,6 +14,7 @@ const commentsSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    userImg: String,
     likes: Array,
   }, 
   { timestamps: true }

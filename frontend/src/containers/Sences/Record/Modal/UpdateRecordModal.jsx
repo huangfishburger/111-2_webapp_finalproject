@@ -10,6 +10,7 @@ import { toLonLat } from 'ol/proj';
 import styled from 'styled-components';
 import { ImageUpload } from 'components/ImageUpload';
 import { OptionCard } from 'components/OptionCard';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const coordTextStyle = {
   fontWeight: "400", 
@@ -65,6 +66,7 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
   const [ speciesOptions, setSpeciesOptions ] = useState(speciesDataSource);
   const [ locationOptions, setLocationOptions ] = useState([]);
   const [ form ] = Form.useForm();
+  const { user } = useAuth0();
 
   useEffect(() => {
     if (userCoord) {
@@ -199,7 +201,7 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
         labelCol={{span: 24,}}
         wrapperCol={{span: 24,}}
         initialValues={{
-          userName: "王大明",
+          userName: user?.name,
           isAuthPulic: true,
           placeCoord: userCoord,
         }}
@@ -269,12 +271,12 @@ const UpdateRecordModal = ({ isUpdateRecordModalOpen, setIsUpdateRecordModalOpen
             </AutoComplete>
             <SubText>🐸：不知道我是誰？</SubText>
           </Form.Item>
-          <Form.Item
+          {/* <Form.Item
             name="animalPhoto"   
           >
             <SubText>您可以上傳拍攝到的動物圖片</SubText>
             <ImageUpload />
-          </Form.Item>
+          </Form.Item> */}
         </div>
 
         <div style={{display: (modalPage === 3)? "block": "none"}}>

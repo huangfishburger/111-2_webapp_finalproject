@@ -41,7 +41,7 @@ const CommentText = styled.div`
   }
 `;
 
-const CommentItem = ({ userName, timeStamp, comment, likes, handleClick }) => {
+const CommentItem = ({ userName, userImg, timeStamp, comment, likes, handleClick }) => {
   /* LIKES ICON */
   const userId = 1; //need to replace!!!
 
@@ -70,7 +70,7 @@ const CommentItem = ({ userName, timeStamp, comment, likes, handleClick }) => {
       <Image
         width={35}
         style={{borderRadius: "50%", marginTop: "4px"}}
-        src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+        src={userImg}
       />
       <CommentText>
         <div className='header'>

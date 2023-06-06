@@ -5,6 +5,7 @@ import { BsPersonFill } from "react-icons/bs";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoginButton from 'components/LoginButton';
 import LogoutButton from 'components/LogoutButton';
+import { UserImg } from "components/UserImg";
 const { Header } = Layout;
 const { SubMenu } = Menu;
 
@@ -140,6 +141,8 @@ const loginItems = [
   
 
 const Navbar = () => {
+  const { isAuthenticated } = useAuth0();
+
   return (
     <CustomizedHeader theme="light">
       <div style={navTitleStyle}>
@@ -159,7 +162,12 @@ const Navbar = () => {
           }}
         >
           <Button shape="circle" style={navItemsStyle}>
-            <BsPersonFill /> 
+            { isAuthenticated && 
+              <UserImg width={"30px"}/>
+            }
+            { !isAuthenticated && 
+              <BsPersonFill /> 
+            }
           </Button>
         </Dropdown>
       </div>

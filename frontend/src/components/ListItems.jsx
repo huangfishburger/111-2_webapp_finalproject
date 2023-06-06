@@ -1,10 +1,11 @@
-import { Image, Collapse } from "antd";
+import { Collapse, message } from "antd";
 import { StatusTag } from "./Tags";
 import { ActionButton } from "./ActionButton";
 import { CommentModal } from "../containers/Sences/Record/Modal"
 import { useEffect, useState } from "react";
 import { BiDotsHorizontalRounded, BiCommentDetail } from 'react-icons/bi';
 import { getRecordComments } from "./../axios";
+import { useAuth0 } from '@auth0/auth0-react';
 
 const listItemsStyle = {
   height: "max-content",
@@ -42,9 +43,14 @@ const { Panel } = Collapse;
 const ListItems = ({ item }) => {
   const [ isCommentModalOpen, setIsCommentModalOpen ] = useState(false);
   const [ comments, setComments ] = useState([]);
+  const { isAuthenticated } = useAuth0();
 
   const handleCommentModalOpen = () => {
-    setIsCommentModalOpen(!isCommentModalOpen);
+    if (isAuthenticated) {
+      setIsCommentModalOpen(!isCommentModalOpen);
+    } else {
+      message.error("🐸💧：請先登入");
+    }
   };
 
   const author = 
@@ -92,11 +98,11 @@ const ListItems = ({ item }) => {
               <div 
                 style={nameTextStyle}
               >
-                <Image
+                {/* <Image
                   width={50}
                   style={{borderRadius: "5px"}}
                   src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-                />
+                /> */}
                 <div style={listItemsTextStyle}>
                   <div style={nameTextStyle}>
                     {item.species}

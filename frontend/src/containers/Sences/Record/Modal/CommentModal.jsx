@@ -4,6 +4,8 @@ import Draggable from 'react-draggable';
 import styled from 'styled-components';
 import { CommentItem } from 'components/CommentItem';
 import { createRecordComments, addCommentLikes } from './../../../../axios';
+import { UserImg } from 'components/UserImg';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const { Panel } = Collapse;
 
@@ -31,6 +33,8 @@ const CommentModal = ({ title, postId, context, isCommentModalOpen, setIsComment
     right: 0,
   });
   const draggleRef = useRef(null);
+  const { user } = useAuth0();
+
 
   /* MODAL DROPABLE */
   const handleCancel = (e) => {
@@ -93,17 +97,14 @@ const CommentModal = ({ title, postId, context, isCommentModalOpen, setIsComment
       }
       footer={
         <div style={{display: "flex"}}>
-          <Image
-            width={30}
-            style={{borderRadius: "50%"}}
-            src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          />：
+          <UserImg width={"30px"}/>：
           <Form
             form={form}
             name="comment"
             initialValues={{
               postId: postId,
-              userName: userName,
+              userName: user?.name,
+              userImg: user?.picture,
             }}
             labelCol={{span: 24,}}
             wrapperCol={{span: 24,}}
@@ -113,6 +114,7 @@ const CommentModal = ({ title, postId, context, isCommentModalOpen, setIsComment
           >
             <Form.Item name="postId" style={{ display: "none" }}/>
             <Form.Item name="userName" style={{ display: "none" }}/>
+            <Form.Item name="userImg" style={{ display: "none" }}/>
             <Form.Item
               name="comment"
               rules={[
@@ -151,6 +153,7 @@ const CommentModal = ({ title, postId, context, isCommentModalOpen, setIsComment
             return (
               <CommentItem
                 userName={comment.userName}
+                userImg={comment.userImg}
                 timeStamp={comment.createdAt}
                 comment={comment.comment}
                 likes={comment.likes}
