@@ -9,6 +9,8 @@ export const getFrogs = async (req, res) => {
       category,
       species,
       name,
+      description,
+      img,
     } = req.query;
 
     var query = {}
@@ -18,6 +20,8 @@ export const getFrogs = async (req, res) => {
     if (category !== "不特定" && category !== undefined ) query["category"] = { $eq: category };
     if (species !== "不特定" && species !== undefined ) query["species"] = { $eq: species };
     if (name !== undefined ) query["name"] = { $regex: name };
+    if (description !== undefined ) query["description"] = { $regex: description };
+    if (img !== undefined ) query["img"] = { $regex: img };
 
     console.log(query);
     const frogs = await FrogDB.find(query); 

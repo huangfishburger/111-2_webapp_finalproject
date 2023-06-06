@@ -9,6 +9,8 @@ export const frogs = [
     patternType: "斑點",
     category: "外來種",
     species: "蟾蜍",
+    description: "又名美洲巨蟾蜍、甘蔗蟾蜍、蔗蟾蜍或蔗蟾，是原產於中美洲及南美洲一種熱帶地區陸生的蟾蜍，後來被引入澳洲，廣泛的分佈在澳洲大陸的東海岸和北部地區。牠們的繁殖能力很強，一次就可以產達幾千顆卵。海蟾蜍有毒腺，蝌蚪對於大部份動物也是有具有劇毒的。牠們被引入到多個國家來控制害蟲，不過由於沒有天敵反而成為了害蟲及入侵物種。國際自然保護聯盟物種存續委員會的入侵物種專家小組（ISSG）列為世界百大外來入侵種。",
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Bufo_marinus_from_Australia.JPG/1024px-Bufo_marinus_from_Australia.JPG",
   },
   {
     _id: new mongoose.Types.ObjectId(),
@@ -18,6 +20,8 @@ export const frogs = [
     patternType: "無花紋",
     category: "外來種",
     species: "錦蛙",
+    description: "亞洲錦蛙（學名：Kaloula pulchra）又名花狹口蛙，為狹口蛙科狹口蛙屬的兩棲動物。分布範圍從緬甸，泰國，寮國，柬埔寨和越南，南部向馬來半島，印尼的蘇門答臘、婆羅洲(坤甸)， 蘇拉威西島 (錫江、帕盧 和弗洛勒斯島)和刁曼島、布吉島、蘭卡威 和新加坡。 印度東北部(西孟加拉邦西部和阿薩姆)和孟加拉國。 在中國大陸，分布於福建、廣東、廣西、海南、雲南等地。該物種的模式產地在中國。[1]本種亦被引進至台灣。背部有黃色紋路，體長7-8厘米，壽命可達10年。",
+    img: "https://images.chinatimes.com/newsphoto/2020-05-22/656/20200522003151.jpg",
   },
   {
     _id: new mongoose.Types.ObjectId(),
@@ -27,6 +31,8 @@ export const frogs = [
     patternType: "條紋",
     category: "外來種",
     species: "牛蛙",
+    description: "美洲牛蛙（學名Lithobates catesbeianus）是一種水生青蛙，是蛙屬的一種。是現存北美的最大的蛙之一。也在多個地方成為入侵物種，如2011年5月台灣苗栗縣政府農業處宣稱為增加生態資源，在縣境兩處號稱生態池的地方放流總共七百斤的美國牛蛙，造成當地不可逆的生態浩刧[2]，國際自然保護聯盟物種存續委員會的入侵物種專家小組（ISSG）也已將美國牛蛙給列為世界百大外來入侵種。",
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/North-American-bullfrog1.jpg/330px-North-American-bullfrog1.jpg",
   },
   {
     _id: new mongoose.Types.ObjectId(),
@@ -36,6 +42,8 @@ export const frogs = [
     patternType: "斑點",
     category: "外來種",
     species: "樹蛙",
+    description: "斑腿樹蛙（學名：Polypedates megacephalus），又稱為斑腿泛樹蛙、大頭斑樹蛙、大頭斑腿泛樹蛙等。模式標本來自香港。與布氏樹蛙相似，不易區分。中型蛙種，雄蛙約50公釐，體型略大的雌蛙可達70公釐。背腹扁平，呈淺褐色，體色可稍為改變以配合周圍環境，皮膚光滑，有零星小疣粒，背部或有交叉形花紋。大眼睛，鼓膜明顯，後肢有半蹼，趾端吸盤發達，被捕捉或受驚時會即時排尿。",
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Brown_Tree_Frog_%28Polypedates_megacephalus%29_%E6%96%91%E8%85%BF%E6%B3%9B%E6%A8%B9%E8%9B%99_in_Amplexus2.jpg/375px-Brown_Tree_Frog_%28Polypedates_megacephalus%29_%E6%96%91%E8%85%BF%E6%B3%9B%E6%A8%B9%E8%9B%99_in_Amplexus2.jpg"
   },
   {
     _id: new mongoose.Types.ObjectId(),
@@ -45,6 +53,19 @@ export const frogs = [
     patternType: "斑點",
     category: "本土種",
     species: "小雨蛙",
+    description: "又名粗皮姬蛙，為狹口蛙科姬蛙屬的兩棲動物，體型屬小型，雄蛙體長約2公分，雌蛙約2至2.5公分左右，叫聲與鴨相像，外表特徵有皮膚上有許多的小疣粒，看起來十分粗糙，背部有塊深色鑲淺色邊的花紋。身體兩側都有一行黑色斑點，和背部大塊花斑平行。吻端尖圓，身體略呈現三角形。後腿有暗色橫紋。",
+    img: "https://upload.wikimedia.org/wikipedia/commons/9/90/Microhyla_butleri.jpg",
+  },
+  {
+    _id: new mongoose.Types.ObjectId(),
+    name: "盤古蟾蜍",
+    backColor: ["黃褐色", "灰褐色"],
+    location: ["草叢", "樹林", "開墾地"],
+    patternType: "條紋",
+    category: "本土種",
+    species: "蟾蜍",
+    description: "又名台灣蟾蜍、癩蝦蟆，為特有種，廣泛分布於全省各地，海拔高度可達3000m。經常出現在陸地較開闊的地方，繁殖期時才會遷移到溪流或靜水池。雄蟾沒有鳴囊不會發出叫聲，只有在被其他雄蟾誤抱時，才會發出「勾、勾、勾」釋放叫聲。而在遭受攻擊時，常會本能地鼓起胸部撐起四肢，裝出雄壯威武的模樣，並發出聲音，這是牠們的防衛姿勢。如果恐嚇無效，牠們會馬上爬走或者攤在地上裝死，最後才會從耳後腺噴出毒液。",
+    img: "https://www.froghome.idv.tw/assets/images/Bufo_bankorensis_L-2.jpg",
   },
   {
     _id: new mongoose.Types.ObjectId(),
@@ -54,6 +75,8 @@ export const frogs = [
     patternType: "斑點",
     category: "本土種",
     species: "樹蛙",
+    description: "台北樹蛙（學名：Zhangixalus taipeianus）為樹蛙科張氏樹蛙屬的兩棲動物，是台灣的特有物種。該物種的模式產地位於今新北市樹林區。身體背部呈翠綠色，腹部則呈黃色，具有隨環境而變更身體顏色的能力。體型屬於中等，體長雄性約3.5－4.5 cm（1.4－1.8英寸），雌性約4.5－5.5 cm（1.8－2.2英寸），比雄性稍長。屬肉食性，其賴以維生的食物是蟲或蟻，在冬天進行交配。一般聚集於水池、及溝渠等靜水區域。",
+    img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Taipei_tree_frog_-_Rhacophorus_taipeianus.jpg/330px-Taipei_tree_frog_-_Rhacophorus_taipeianus.jpg",
   }
 ];
 

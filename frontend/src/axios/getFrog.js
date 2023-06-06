@@ -7,6 +7,8 @@ export const getFrog = async ( fromdata ) => {
   const category = fromdata.category;
   const species = fromdata.species;
   const name = fromdata.name;
+  const description = fromdata.description;
+  const img = fromdata.img;
 
   const { data } = await instance.get('/frog', { 
     params: 

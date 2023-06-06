@@ -172,27 +172,29 @@ const Search = (props) => {
   const onLabelFinish = async (values) => {
     message.success("💪🐸：查詢成功");
     const data = await getFrog(values);
-    console.log(data);
     const queryParams = new URLSearchParams();
     data.forEach((item, index) => {
       queryParams.append(`name${index + 1}`, item.name);
-    });
-    setLabelFrogs(data);
-    navigate(`/result?${queryParams}`);
-  };
-  
-  const onSpeciesAndNameFinish = async (values) => {
-    console.log(values);
-    message.success("💪🐸：查詢成功");
-    const data = await getFrog(values);
-    console.log(data);
-    const queryParams = new URLSearchParams();
-    data.forEach((item, index) => {
-      queryParams.append(`name${index + 1}`, item.name);
+      queryParams.append(`description${index + 1}`, item.description);
+      queryParams.append(`img${index + 1}`, item.img);
     });
     setSpeciesAndNameFrogsFrogs(data);
     navigate(`/result?${queryParams}`);
   };
+  
+  const onSpeciesAndNameFinish = async (values) => {
+    message.success("💪🐸：查詢成功");
+    const data = await getFrog(values);
+    const queryParams = new URLSearchParams();
+    data.forEach((item, index) => {
+      queryParams.append(`name${index + 1}`, item.name);
+      queryParams.append(`description${index + 1}`, item.description);
+      queryParams.append(`img${index + 1}`, item.img);
+    });
+    setSpeciesAndNameFrogsFrogs(data);
+    navigate(`/result?${queryParams}`);
+  };
+  
 
   /* SELECT CHANGE */
   const onColorChange = (value) => {

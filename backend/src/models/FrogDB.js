@@ -21,6 +21,12 @@ const forgSchema = new Schema({
     },
     species: {
         type: String,
+    },
+    description: {
+        type: String,
+    },
+    img: {
+        type: String,
     }
 });
 

@@ -30,9 +30,8 @@ const Game = (props) => {
             message.error("請選擇遊戲難度");
         }
         else{
-            navigate('/problem');
-        }
-            
+          navigate('/problem', { state: { hashtagTypes } });
+        }     
     };
     return (
         <div style={{ ...props.contentStyle}}>
