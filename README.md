@@ -22,7 +22,7 @@
 1. 於根目錄底下執行yarn(or npm) install:all
 2. 執行yarn(or npm) start開啟前端
 3. 執行yarn(or npm) server開啟後端
-  - 本專案後端資料庫用於**mongodb**，在需要copy backend\.env.defalut 的內容於 backend\.env 中，輸入自己的mongodb url(環境變數名稱：MONGO_URL)
+  - 本專案後端資料庫用於**mongodb**，在需要copy backend\\.env.defalut 的內容於 backend\\.env 中，輸入自己的mongodb url(環境變數名稱：MONGO_URL)
 
 ## File Structure
 ### FRONTEND
