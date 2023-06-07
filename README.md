@@ -23,6 +23,7 @@
 2. 在根目錄底下執行yarn(or npm) start，或cd frontend後yarn(or npm) start，開啟前端
 3. 在根目錄底下執行yarn(or npm) server，或cd backend後yarn(or npm) server，開啟後端
   - 本專案後端資料庫用於**mongodb**，在需要copy backend\\.env.defalut 的內容於 backend\\.env 中，輸入自己的mongodb url(環境變數名稱：MONGO_URL)
+  - 在backend\\src\\server.js中line 34, 35將註解打開，上傳預設資料進資料庫**僅需上傳一次，上傳後請註解掉**
 
 ## File Structure
 ### FRONTEND
